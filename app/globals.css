@@ -1,26 +1,213 @@
 @import "tailwindcss";
 
 :root {
+  /* Vortex brand */
+  --vortex-blue: #0878df;
+  --vortex-blue-dark: #0759a5;
+  --vortex-blue-light: #2f9cff;
+  --vortex-gold: #ffbd00;
+
+  /* Light theme */
   --background: #ffffff;
-  --foreground: #171717;
+  --background-soft: #f5f8fc;
+  --background-blue: #eef6ff;
+
+  /* Surfaces */
+  --surface: #ffffff;
+  --surface-soft: #f8fafc;
+  --surface-blue: #f2f7fc;
+
+  /* Text */
+  --foreground: #172033;
+  --foreground-muted: #667085;
+  --foreground-subtle: #98a2b3;
+
+  /* Borders */
+  --border: #e4eaf1;
+  --border-strong: #d4dde8;
+
+  /* Effects */
+  --blue-glow: rgba(8, 120, 223, 0.14);
+  --gold-glow: rgba(255, 189, 0, 0.16);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
+
+::selection {
+  background: var(--vortex-blue);
+  color: #ffffff;
+}
+
+/* --------------------------------
+   VORTEX CONTAINER
+-------------------------------- */
+
+.vortex-container {
+  width: min(1400px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+/* --------------------------------
+   LIGHT ENGINEERING GRID
+-------------------------------- */
+
+.vortex-grid {
+  background-image:
+    linear-gradient(rgba(8, 120, 223, 0.045) 1px,
+      transparent 1px),
+    linear-gradient(90deg,
+      rgba(8, 120, 223, 0.045) 1px,
+      transparent 1px);
+
+  background-size: 64px 64px;
+}
+
+/* --------------------------------
+   SECTION LABEL
+-------------------------------- */
+
+.vortex-label {
+  color: var(--vortex-blue);
+
+  font-size: 0.72rem;
+  font-weight: 700;
+
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* --------------------------------
+   GOLD ACCENT LINE
+-------------------------------- */
+
+.vortex-line {
+  width: 100%;
+  height: 1px;
+
+  background: var(--border);
+}
+
+/* --------------------------------
+   BUTTON FOUNDATION
+-------------------------------- */
+
+.vortex-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 48px;
+  padding: 0 24px;
+
+  border: 1px solid transparent;
+  border-radius: 4px;
+
+  font-size: 0.9rem;
+  font-weight: 700;
+
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.vortex-button:hover {
+  transform: translateY(-2px);
+}
+
+.vortex-button-primary {
+  background: var(--vortex-blue);
+  color: #ffffff;
+
+  box-shadow:
+    0 8px 24px rgba(8, 120, 223, 0.18);
+}
+
+.vortex-button-primary:hover {
+  background: var(--vortex-blue-dark);
+
+  box-shadow:
+    0 12px 30px rgba(8, 120, 223, 0.24);
+}
+
+.vortex-button-gold {
+  background: var(--vortex-gold);
+  color: #172033;
+
+  box-shadow:
+    0 8px 24px rgba(255, 189, 0, 0.18);
+}
+
+.vortex-button-gold:hover {
+  background: #eaaa00;
+}
+
+/* --------------------------------
+   SCROLLBAR
+-------------------------------- */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f4f8;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c7d1dd;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--vortex-blue);
+}
+
+/* --------------------------------
+   ACCESSIBILITY
+-------------------------------- */
+
+:focus-visible {
+  outline: 2px solid var(--vortex-blue);
+  outline-offset: 4px;
+}
+
+/* --------------------------------
+   RESPONSIVE CONTAINER
+-------------------------------- */
+
+@media (max-width: 768px) {
+  .vortex-container {
+    width: min(100% - 32px, 1400px);
+  }
 }
