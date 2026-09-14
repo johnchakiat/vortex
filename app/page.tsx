@@ -10,6 +10,9 @@ import {
   Flame,
   Globe2,
   Layers3,
+  Mail,
+  MapPin,
+  Phone,
   RadioTower,
   Ruler,
   Target,
@@ -721,7 +724,7 @@ export default function Home() {
               type="button"
               aria-label="Next testimonial"
               onClick={nextTestimonial}
-              className="absolute right-0 top-1/2 z-20 hidden h-12 w-12 translate-x-1/2 -translate-y-1/2 items-center justify-center border border-[#cfd7e2] bg-white text-[#0878df] shadow-sm transition-all duration-300 hover:border-[#0878df] hover:bg-[#0878df] hover:text-white lg:flex"
+              className="absolute right-0 top-1/2 z-20 hidden h-12 w-12 translate-x-1/2 -translate-y-1/2 items-center justify-center border border-[#cfd7e2] bg-white text-[#0878df] shadow-sm transition-all duration-300 hover:border-[#0878df] hover:bg-[#0878df] hover:text-white"
             >
               <ArrowRight size={22} />
             </button>
@@ -926,139 +929,164 @@ export default function Home() {
       </section>
 
       {/* =========================================================
-          WHY PARTNER WITH US
-      ========================================================= */}
+    WHY PARTNER WITH US
+========================================================= */}
 
-      <section className="relative overflow-hidden bg-white py-24 sm:py-28 lg:py-32">
+      <section
+        id="why-partner"
+        className="relative overflow-hidden bg-[#07111f] py-20 text-white sm:py-24 lg:py-28"
+      >
+        {/* Technical grid */}
+        <div
+          className="pointer-events-none absolute inset-0 opacity-20"
+          style={{
+            backgroundImage: `
+        linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px)
+      `,
+            backgroundSize: "72px 72px",
+          }}
+        />
+
+        {/* Soft engineering glow */}
+        <div className="pointer-events-none absolute -right-40 top-20 h-[500px] w-[500px] rounded-full bg-[#0878df]/10 blur-[120px]" />
+
         <div className="vortex-container relative">
-          <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr]">
+          {/* Heading */}
+          <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-end">
             <div>
               <div className="mb-5 flex items-center gap-4">
-                <span className="h-px w-12 bg-[#0878df]" />
+                <span className="h-px w-12 bg-[#ffbd00]" />
 
-                <span className="vortex-label">
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#ffbd00]">
                   Why Partner With Us
                 </span>
               </div>
 
-              <h2 className="text-5xl font-bold leading-[0.95] tracking-[-0.05em] text-[#172033] sm:text-6xl lg:text-7xl">
-                Built around
+              <h2 className="max-w-3xl text-5xl font-bold leading-[0.95] tracking-[-0.05em] text-white sm:text-6xl lg:text-7xl">
+                Engineering expertise
                 <br />
-                <span className="text-[#0878df]">
-                  better coordination.
-                </span>
+                <span className="text-[#0878df]">that delivers.</span>
               </h2>
             </div>
 
-            <div className="grid gap-px bg-[#dfe7f0] sm:grid-cols-2">
-              {[
-                {
-                  icon: Layers3,
-                  title: "Integrated Expertise",
-                  text: "Multiple engineering disciplines working together through a coordinated approach.",
-                },
-                {
-                  icon: Ruler,
-                  title: "BIM up to LOD 500",
-                  text: "Detailed BIM capability supporting coordinated and information-rich project delivery.",
-                },
-                {
-                  icon: Globe2,
-                  title: "Multi-Sector Portfolio",
-                  text: "Engineering experience supporting a range of building and development requirements.",
-                },
-                {
-                  icon: Building2,
-                  title: "Global Delivery",
-                  text: "Delivery capabilities across the UAE, Qatar, KSA, Oman, India and internationally.",
-                },
-              ].map((item) => {
-                const Icon = item.icon;
-
-                return (
-                  <div
-                    key={item.title}
-                    className="group bg-white p-8 transition hover:bg-[#eef6ff] sm:p-9"
-                  >
-                    <div className="flex items-center justify-between">
-                      <Icon
-                        size={25}
-                        strokeWidth={1.5}
-                        className="text-[#0878df]"
-                      />
-
-                      <ArrowUpRight
-                        size={18}
-                        className="text-[#98a2b3] transition group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-[#0878df]"
-                      />
-                    </div>
-
-                    <h3 className="mt-10 text-xl font-bold text-[#172033]">
-                      {item.title}
-                    </h3>
-
-                    <p className="mt-4 text-sm leading-7 text-[#667085]">
-                      {item.text}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================
-          CONTACT
-      ========================================================= */}
-
-      <section
-        id="contact"
-        className="relative overflow-hidden bg-[#0878df] py-24 text-white sm:py-32 lg:py-36"
-      >
-        <div
-          className="pointer-events-none absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)
-            `,
-            backgroundSize: "70px 70px",
-          }}
-        />
-
-        <div className="vortex-container relative">
-          <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
-            <div>
-              <div className="mb-6 flex items-center gap-4">
-                <span className="h-px w-12 bg-[#ffbd00]" />
-
-                <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#ffbd00]">
-                  Start a conversation
-                </span>
-              </div>
-
-              <h2 className="max-w-4xl text-5xl font-bold leading-[0.95] tracking-[-0.05em] sm:text-6xl lg:text-8xl">
-                Let&apos;s engineer
-                <br />
-                what comes next.
-              </h2>
-
-              <p className="mt-8 max-w-xl text-lg leading-8 text-white/80">
-                Have a project that needs coordinated engineering expertise?
-                Get in touch with Vortex Enveco Consultancy LLC.
+            <div className="lg:pb-2">
+              <p className="max-w-xl text-base leading-8 text-white/60 sm:text-lg">
+                We combine multidisciplinary engineering expertise, advanced BIM
+                capabilities and international project experience to deliver
+                coordinated solutions from concept through construction.
               </p>
             </div>
+          </div>
 
-            <div className="lg:text-right">
-              <a
-                href="mailto:info@vortexenveco.com"
-                className="group inline-flex items-center gap-4 border border-white/40 bg-white px-7 py-5 text-sm font-bold uppercase tracking-[0.12em] text-[#172033] transition duration-300 hover:bg-[#ffbd00]"
+          {/* Capability cards */}
+          <div className="mt-14 grid gap-px bg-white/10 md:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                number: "01",
+                title: "Integrated Expertise",
+                description:
+                  "Vertical Transport, MEP and BIM expertise brought together under one coordinated engineering approach.",
+                accent: "blue",
+              },
+              {
+                number: "02",
+                title: "BIM up to LOD 500",
+                description:
+                  "Advanced BIM capabilities supporting detailed coordination, documentation and construction-ready models.",
+                accent: "gold",
+              },
+              {
+                number: "03",
+                title: "Multi-Sector Portfolio",
+                description:
+                  "Experience across diverse building sectors and complex engineering requirements.",
+                accent: "blue",
+              },
+              {
+                number: "04",
+                title: "Global Delivery",
+                description:
+                  "A delivery model designed to support projects across locations while maintaining quality and coordination.",
+                accent: "gold",
+              },
+            ].map((item) => (
+              <div
+                key={item.number}
+                className="group relative min-h-[290px] overflow-hidden bg-[#0b1929] p-7 transition-all duration-500 hover:bg-[#10243a] sm:p-8"
               >
-                info@vortexenveco.com
+                {/* Top accent */}
+                <div
+                  className={`absolute left-0 top-0 h-[3px] w-full origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100 ${item.accent === "gold"
+                    ? "bg-[#ffbd00]"
+                    : "bg-[#0878df]"
+                    }`}
+                />
+
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-xs font-bold tracking-[0.18em] text-white/35">
+                    {item.number}
+                  </span>
+
+                  <span
+                    className={`h-2 w-2 rounded-full transition-all duration-500 group-hover:scale-150 ${item.accent === "gold"
+                      ? "bg-[#ffbd00]"
+                      : "bg-[#0878df]"
+                      }`}
+                  />
+                </div>
+
+                <h3 className="mt-12 max-w-xs font-serif text-2xl font-bold leading-tight text-white transition-colors duration-300 group-hover:text-[#0878df]">
+                  {item.title}
+                </h3>
+
+                <p className="mt-5 max-w-sm text-[15px] leading-7 text-white/50 transition-colors duration-300 group-hover:text-white/65">
+                  {item.description}
+                </p>
+
+                <div className="absolute bottom-7 left-7 flex items-center gap-3 sm:left-8">
+                  <div
+                    className={`h-px w-8 transition-all duration-500 group-hover:w-14 ${item.accent === "gold"
+                      ? "bg-[#ffbd00]"
+                      : "bg-[#0878df]"
+                      }`}
+                  />
+
+                  <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-white/30">
+                    VEC / ENGINEERING
+                  </span>
+                </div>
 
                 <ArrowUpRight
-                  size={19}
+                  size={18}
+                  className="absolute bottom-7 right-7 text-white/20 transition-all duration-500 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-white/70"
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* Bottom statement */}
+          <div className="mt-12 border-t border-white/10 pt-8">
+            <div className="flex flex-col justify-between gap-7 sm:flex-row sm:items-center">
+              <div>
+                <span className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-[#ffbd00]">
+                  Built for complex projects
+                </span>
+
+                <p className="mt-2 text-[15px] text-white/45">
+                  One coordinated approach across disciplines, teams and project
+                  stages.
+                </p>
+              </div>
+
+              <a
+                href="#contact"
+                className="group inline-flex w-fit items-center gap-3 border border-[#0878df] px-6 py-3.5 text-[13px] font-bold uppercase tracking-[0.12em] text-white transition-all duration-300 hover:bg-[#0878df]"
+              >
+                Discuss Your Project
+
+                <ArrowUpRight
+                  size={17}
                   className="transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
                 />
               </a>
@@ -1068,79 +1096,517 @@ export default function Home() {
       </section>
 
       {/* =========================================================
-          FOOTER
-      ========================================================= */}
+    CONTACT
+========================================================= */}
 
-      <footer className="bg-[#07111f] text-white">
-        <div className="vortex-container py-14">
-          <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr_0.8fr]">
-            <div>
-              <div className="mb-6">
-                <img
-                  src="/vortex-logo.png"
-                  alt="Vortex Enveco Consultancy LLC"
-                  className="w-[230px] brightness-0 invert"
-                />
-              </div>
+      <section
+        id="contact"
+        className="relative overflow-hidden bg-[#07111f] py-20 text-white sm:py-24 lg:py-28"
+      >
+        {/* Continuing technical grid */}
+        <div
+          className="pointer-events-none absolute inset-0 opacity-20"
+          style={{
+            backgroundImage: `
+        linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)
+      `,
+            backgroundSize: "72px 72px",
+          }}
+        />
 
-              <p className="max-w-md text-sm leading-7 text-white/60">
-                Engineering consultancy specializing in Vertical Transport,
-                MEP and BIM engineering solutions.
-              </p>
+        {/* Ambient blue glow */}
+        <div className="pointer-events-none absolute -left-48 top-1/3 h-[550px] w-[550px] rounded-full bg-[#0878df]/10 blur-[140px]" />
+
+        <div className="pointer-events-none absolute -right-32 bottom-0 h-[400px] w-[400px] rounded-full bg-[#0878df]/10 blur-[120px]" />
+
+        <div className="vortex-container relative">
+          {/* Section heading */}
+          <div className="max-w-4xl">
+            <div className="mb-6 flex items-center gap-4">
+              <span className="h-px w-12 bg-[#ffbd00]" />
+
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#ffbd00]">
+                Start a Conversation
+              </span>
             </div>
 
-            <div>
-              <div className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-[#ffbd00]">
-                Office
-              </div>
+            <h2 className="max-w-4xl text-5xl font-bold leading-[0.95] tracking-[-0.05em] text-white sm:text-6xl lg:text-7xl">
+              Let&apos;s build something
+              <br />
+              <span className="text-[#0878df]">exceptional.</span>
+            </h2>
 
-              <p className="text-sm leading-7 text-white/70">
-                Jamal Al Muhairi building
-                <br />
-                Office 101
-                <br />
-                Al Garhoud, Dubai
-              </p>
-            </div>
-
-            <div>
-              <div className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-[#ffbd00]">
-                Contact
-              </div>
-
-              <a
-                href="tel:0504242468"
-                className="block text-sm text-white/70 transition hover:text-white"
-              >
-                050 424 2468
-              </a>
-
-              <a
-                href="mailto:info@vortexenveco.com"
-                className="mt-2 block text-sm text-white/70 transition hover:text-white"
-              >
-                info@vortexenveco.com
-              </a>
-
-              <p className="mt-5 text-sm text-white/50">
-                Mon – Sat: 9:00am – 5:00pm
-                <br />
-                Sunday: Closed
-              </p>
-            </div>
+            <p className="mt-7 max-w-2xl text-base leading-8 text-white/55 sm:text-lg">
+              Tell us about your project and our engineering team will get back to
+              you to discuss how Vortex Enveco Consultancy can support your
+              requirements.
+            </p>
           </div>
 
-          <div className="mt-14 border-t border-white/10 pt-6">
-            <div className="flex flex-col justify-between gap-4 text-xs text-white/40 sm:flex-row">
-              <p>
-                © {new Date().getFullYear()} Vortex Enveco Consultancy LLC.
-                All rights reserved.
-              </p>
+          {/* Contact layout */}
+          <div className="mt-14 grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-16">
+            {/* Contact information */}
+            <div>
+              <div className="border-t border-white/10">
+                {/* Office */}
+                <div className="group border-b border-white/10 py-7">
+                  <div className="flex items-start justify-between gap-6">
+                    <div>
+                      <span className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[#ffbd00]">
+                        Office
+                      </span>
 
-              <p>Engineering Consultancy</p>
+                      <p className="mt-3 text-base font-medium text-white">
+                        Jamal Al Muhairi Building
+                      </p>
+
+                      <p className="mt-1 text-sm text-white/45">
+                        Office 101, Al Garhoud, Dubai
+                      </p>
+                    </div>
+
+                    <div className="flex h-9 w-9 items-center justify-center border border-white/10 text-[#0878df] transition-all duration-300 group-hover:border-[#0878df] group-hover:bg-[#0878df] group-hover:text-white">
+                      <Building2 size={16} />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Phone */}
+                <div className="group border-b border-white/10 py-7">
+                  <div className="flex items-start justify-between gap-6">
+                    <div>
+                      <span className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[#ffbd00]">
+                        Phone
+                      </span>
+
+                      <a
+                        href="tel:+971504242468"
+                        className="mt-3 block text-base font-medium text-white transition-colors duration-300 group-hover:text-[#0878df]"
+                      >
+                        050 424 2468
+                      </a>
+
+                      <p className="mt-1 text-sm text-white/45">
+                        Mon – Sat · 9:00am – 5:00pm
+                      </p>
+                    </div>
+
+                    <div className="flex h-9 w-9 items-center justify-center border border-white/10 text-[#0878df] transition-all duration-300 group-hover:border-[#0878df] group-hover:bg-[#0878df] group-hover:text-white">
+                      <ArrowUpRight size={16} />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Email */}
+                <div className="group border-b border-white/10 py-7">
+                  <div className="flex items-start justify-between gap-6">
+                    <div>
+                      <span className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[#ffbd00]">
+                        Email
+                      </span>
+
+                      <a
+                        href="mailto:info@vortexenveco.com"
+                        className="mt-3 block text-base font-medium text-white transition-colors duration-300 group-hover:text-[#0878df]"
+                      >
+                        info@vortexenveco.com
+                      </a>
+
+                      <p className="mt-1 text-sm text-white/45">
+                        Send us your project requirements
+                      </p>
+                    </div>
+
+                    <div className="flex h-9 w-9 items-center justify-center border border-white/10 text-[#0878df] transition-all duration-300 group-hover:border-[#0878df] group-hover:bg-[#0878df] group-hover:text-white">
+                      <ArrowUpRight size={16} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Engineering statement */}
+              <div className="mt-9 border border-white/10 bg-[#0b1929] p-6">
+                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[#0878df]">
+                  VEC / ENGINEERING
+                </span>
+
+                <p className="mt-3 text-sm leading-7 text-white/45">
+                  Vertical Transport · MEP · BIM
+                </p>
+              </div>
+            </div>
+
+            {/* Form */}
+            <div className="border border-white/10 bg-[#0b1929] p-6 sm:p-8 lg:p-10">
+              <div className="mb-8 flex items-center justify-between border-b border-white/10 pb-6">
+                <div>
+                  <span className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[#ffbd00]">
+                    Project Enquiry
+                  </span>
+
+                  <h3 className="mt-2 text-2xl font-bold text-white">
+                    Tell us about your project
+                  </h3>
+                </div>
+
+                <span className="hidden font-mono text-[10px] tracking-[0.16em] text-white/25 sm:block">
+                  VEC / 01
+                </span>
+              </div>
+
+              <form className="space-y-5">
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <div>
+                    <label
+                      htmlFor="contact-name"
+                      className="mb-2 block font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-white/45"
+                    >
+                      Name
+                    </label>
+
+                    <input
+                      id="contact-name"
+                      type="text"
+                      placeholder="Your name"
+                      className="w-full border border-white/10 bg-[#07111f] px-4 py-3.5 text-sm text-white outline-none transition-all duration-300 placeholder:text-white/20 focus:border-[#0878df] focus:ring-1 focus:ring-[#0878df]/30"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="contact-email"
+                      className="mb-2 block font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-white/45"
+                    >
+                      Email
+                    </label>
+
+                    <input
+                      id="contact-email"
+                      type="email"
+                      placeholder="you@example.com"
+                      className="w-full border border-white/10 bg-[#07111f] px-4 py-3.5 text-sm text-white outline-none transition-all duration-300 placeholder:text-white/20 focus:border-[#0878df] focus:ring-1 focus:ring-[#0878df]/30"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="contact-company"
+                    className="mb-2 block font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-white/45"
+                  >
+                    Company
+                  </label>
+
+                  <input
+                    id="contact-company"
+                    type="text"
+                    placeholder="Company name"
+                    className="w-full border border-white/10 bg-[#07111f] px-4 py-3.5 text-sm text-white outline-none transition-all duration-300 placeholder:text-white/20 focus:border-[#0878df] focus:ring-1 focus:ring-[#0878df]/30"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="contact-message"
+                    className="mb-2 block font-mono text-[10px] font-bold uppercase tracking-[0.15em] text-white/45"
+                  >
+                    Project Details
+                  </label>
+
+                  <textarea
+                    id="contact-message"
+                    rows={6}
+                    placeholder="Tell us about your project, requirements or engineering needs..."
+                    className="w-full resize-none border border-white/10 bg-[#07111f] px-4 py-3.5 text-sm text-white outline-none transition-all duration-300 placeholder:text-white/20 focus:border-[#0878df] focus:ring-1 focus:ring-[#0878df]/30"
+                  />
+                </div>
+
+                <div className="flex flex-col justify-between gap-5 border-t border-white/10 pt-6 sm:flex-row sm:items-center">
+                  <p className="max-w-sm text-xs leading-6 text-white/30">
+                    We&apos;ll use the information provided only to respond to your
+                    enquiry.
+                  </p>
+
+                  <button
+                    type="submit"
+                    className="group inline-flex items-center justify-center gap-3 bg-[#0878df] px-7 py-4 text-[12px] font-bold uppercase tracking-[0.14em] text-white transition-all duration-300 hover:bg-[#2f9cff] hover:shadow-[0_12px_35px_rgba(8,120,223,0.25)]"
+                  >
+                    Send Enquiry
+
+                    <ArrowUpRight
+                      size={17}
+                      className="transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
+                    />
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
+      </section>
+
+      {/* =========================================================
+          FOOTER
+      ========================================================= */}
+
+      <footer className="relative overflow-hidden bg-black text-white">
+        {/* subtle engineering grid */}
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.035]"
+          style={{
+            backgroundImage: `
+        linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)
+      `,
+            backgroundSize: "80px 80px",
+          }}
+        />
+
+        <div className="vortex-container relative">
+          <div className="grid gap-12 py-16 sm:py-20 lg:grid-cols-[1.35fr_0.7fr_0.95fr_1.25fr] lg:gap-10">
+
+            {/* About */}
+            <div className="max-w-md">
+              <a
+                href="/"
+                className="group inline-block"
+                aria-label="Vortex Enveco home"
+              >
+                <div className="relative">
+                  <img
+                    src="/vortex-logo.png"
+                    alt="Vortex Enveco Consultancy LLC"
+                    className="h-auto w-[245px] object-contain"
+                  />
+
+                  <span className="absolute bottom-[-6px] left-0 h-[2px] w-0 bg-[#ffbd00] transition-all duration-500 group-hover:w-[88%]" />
+                </div>
+              </a>
+
+              <div className="mt-8 flex items-center gap-3">
+                <span className="h-px w-8 bg-[#ffbd00]" />
+
+                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[#ffbd00]">
+                  Engineering Consultancy
+                </span>
+              </div>
+
+              <p className="mt-5 max-w-sm text-[14px] leading-7 text-white/40">
+                VEC LLC is an engineering consultancy specialising in Vertical
+                Transport, MEP and BIM engineering solutions. With extensive
+                experience, we provide comprehensive engineering services from
+                concept design to construction supervision.
+              </p>
+
+              <div className="mt-7 flex items-center gap-2">
+                {[
+                  ["Facebook", "f"],
+                  ["X", "X"],
+                  ["YouTube", "YT"],
+                  ["Instagram", "IG"],
+                ].map(([label, short]) => (
+                  <a
+                    key={label}
+                    href="#"
+                    aria-label={label}
+                    className="flex h-9 min-w-9 items-center justify-center border border-white/10 px-2.5 font-mono text-[10px] font-bold uppercase tracking-[0.08em] text-white/40 transition-all duration-300 hover:border-[#0878df] hover:bg-[#0878df] hover:text-white"
+                  >
+                    {short}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Quick Links */}
+            <div>
+              <div className="mb-7 flex items-center gap-3">
+                <span className="h-5 w-[2px] bg-[#ffbd00]" />
+
+                <h3 className="font-serif text-lg font-bold text-white">
+                  Quick Links
+                </h3>
+              </div>
+
+              <nav className="flex flex-col gap-4">
+                {[
+                  ["Home", "/"],
+                  ["About Us", "#about"],
+                  ["Our Blog", "#blog"],
+                  ["Our Services", "#services"],
+                  ["Contact", "#contact"],
+                ].map(([label, href]) => (
+                  <a
+                    key={label}
+                    href={href}
+                    className="group flex w-fit items-center gap-2 text-[14px] text-white/40 transition-colors duration-300 hover:text-white"
+                  >
+                    <span className="h-px w-0 bg-[#0878df] transition-all duration-300 group-hover:w-4" />
+                    {label}
+                  </a>
+                ))}
+              </nav>
+            </div>
+
+            {/* Services */}
+            <div>
+              <div className="mb-7 flex items-center gap-3">
+                <span className="h-5 w-[2px] bg-[#ffbd00]" />
+
+                <h3 className="font-serif text-lg font-bold text-white">
+                  Services
+                </h3>
+              </div>
+
+              <nav className="flex flex-col gap-4">
+                {[
+                  "Vertical Transport",
+                  "Electrical Systems",
+                  "HVAC Systems",
+                  "Public Health Eng",
+                  "Fire Protection",
+                  "ELV Systems",
+                ].map((service) => (
+                  <a
+                    key={service}
+                    href="#services"
+                    className="group flex w-fit items-center gap-2 text-[14px] text-white/40 transition-colors duration-300 hover:text-white"
+                  >
+                    <span className="h-px w-0 bg-[#0878df] transition-all duration-300 group-hover:w-4" />
+                    {service}
+                  </a>
+                ))}
+              </nav>
+            </div>
+
+            {/* Contact */}
+            <div>
+              <div className="mb-7 flex items-center gap-3">
+                <span className="h-5 w-[2px] bg-[#ffbd00]" />
+
+                <h3 className="font-serif text-lg font-bold text-white">
+                  Get In Touch
+                </h3>
+              </div>
+
+              <div className="space-y-3">
+
+                {/* Phone */}
+                <a
+                  href="tel:+971504242468"
+                  className="group flex items-center gap-4 border border-white/10 bg-white/[0.025] p-4 transition-all duration-300 hover:border-[#0878df]/50 hover:bg-[#0878df]/[0.08]"
+                >
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-[#0878df] text-white transition-all duration-300 group-hover:bg-[#ffbd00] group-hover:text-black">
+                    <Phone size={17} />
+                  </div>
+
+                  <div className="min-w-0">
+                    <span className="block font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-[#ffbd00]">
+                      Phone
+                    </span>
+
+                    <span className="mt-1 block text-[14px] text-white/70">
+                      050 424 2468
+                    </span>
+                  </div>
+                </a>
+
+                {/* Address */}
+                <div className="group flex items-center gap-4 border border-white/10 bg-white/[0.025] p-4 transition-all duration-300 hover:border-[#0878df]/50 hover:bg-[#0878df]/[0.08]">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-[#0878df] text-white transition-all duration-300 group-hover:bg-[#ffbd00] group-hover:text-black">
+                    <MapPin size={17} />
+                  </div>
+
+                  <div className="min-w-0">
+                    <span className="block font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-[#ffbd00]">
+                      Office
+                    </span>
+
+                    <span className="mt-1 block text-[13px] leading-5 text-white/70">
+                      Jamal Al Muhairi Building,
+                      <br />
+                      Office 101, Al Garhoud, Dubai
+                    </span>
+                  </div>
+                </div>
+
+                {/* Email */}
+                <a
+                  href="mailto:info@vortexenveco.com"
+                  className="group flex items-center gap-4 border border-white/10 bg-white/[0.025] p-4 transition-all duration-300 hover:border-[#0878df]/50 hover:bg-[#0878df]/[0.08]"
+                >
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-[#0878df] text-white transition-all duration-300 group-hover:bg-[#ffbd00] group-hover:text-black">
+                    <Mail size={17} />
+                  </div>
+
+                  <div className="min-w-0">
+                    <span className="block font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-[#ffbd00]">
+                      Email
+                    </span>
+
+                    <span className="mt-1 block break-all text-[13px] text-white/70">
+                      info@vortexenveco.com
+                    </span>
+                  </div>
+                </a>
+
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom divider */}
+          <div className="h-px w-full bg-white/10" />
+
+          {/* Copyright */}
+          <div className="flex flex-col justify-between gap-5 py-6 sm:flex-row sm:items-center">
+            <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/30">
+              © 2026 Vortexenveco. All Rights Reserved
+            </p>
+
+            <div className="flex items-center gap-5">
+              <a
+                href="#"
+                className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/30 transition-colors hover:text-white"
+              >
+                Privacy
+              </a>
+
+              <span className="h-3 w-px bg-white/10" />
+
+              <a
+                href="#"
+                className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/30 transition-colors hover:text-white"
+              >
+                Terms
+              </a>
+
+              <span className="h-3 w-px bg-white/10" />
+
+              <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#0878df]">
+                VEC / DUBAI
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* WhatsApp */}
+        <a
+          href="https://wa.me/971504242468"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Chat with Vortex Enveco on WhatsApp"
+          className="group fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_10px_35px_rgba(0,0,0,0.45)] transition-all duration-300 hover:scale-110 hover:shadow-[0_12px_40px_rgba(37,211,102,0.3)]"
+        >
+          <svg
+            viewBox="0 0 32 32"
+            className="h-7 w-7 fill-current"
+            aria-hidden="true"
+          >
+            <path d="M19.11 17.21c-.28-.14-1.64-.81-1.9-.9-.26-.1-.45-.14-.64.14-.19.28-.73.9-.9 1.08-.17.19-.33.21-.61.07-.28-.14-1.18-.44-2.25-1.39-.83-.74-1.39-1.65-1.55-1.93-.16-.28-.02-.43.12-.57.12-.12.28-.33.42-.5.14-.17.19-.28.28-.47.09-.19.05-.35-.02-.5-.07-.14-.64-1.54-.87-2.11-.23-.55-.46-.48-.64-.49h-.54c-.19 0-.5.07-.76.35-.26.28-1 1-.1 2.43.9 1.43 1.72 2.48 3.04 3.1 1.31.63 1.31.42 1.55.39.24-.02.77-.31.88-.61.11-.3.11-.55.08-.61-.03-.05-.1-.08-.21-.14z" />
+
+            <path d="M16 3a13 13 0 0 0-11.25 19.5L3 29l6.66-1.7A13 13 0 1 0 16 3zm0 23.7c-2.1 0-4.15-.56-5.95-1.62l-.43-.25-3.95 1.01 1.05-3.84-.28-.45A10.7 10.7 0 1 1 16 26.7z" />
+          </svg>
+        </a>
       </footer>
     </main>
   );
