@@ -290,7 +290,7 @@ export default function Home() {
   });
 
   return (
-    <main className="min-h-screen bg-white text-[#172033]">
+    <main className="relative min-h-screen overflow-x-clip bg-[#07111f] text-[#172033]">
       <Navbar />
 
       {/* =========================================================
