@@ -897,12 +897,14 @@ export default function Home() {
               {visiblePartners.map((partner, index) => (
                 <div
                   key={`${partner.name}-${index}`}
-                  className="group flex h-[158px] items-center justify-center overflow-hidden border border-[#d9d9d9] bg-[#f7f7f7] px-8 transition-all duration-300 hover:bg-white hover:shadow-md"
+                  className="group flex h-[158px] items-center justify-center overflow-hidden border border-[#d9d9d9] bg-[#f7f7f7] px-8 transition-all duration-300 hover:bg-white hover:shadow-md
+        max-sm:h-[145px] max-sm:px-5"
                 >
                   <img
                     src={partner.image}
                     alt={partner.name}
-                    className="max-h-[105px] max-w-[205px] object-contain opacity-90 transition-all duration-300 group-hover:scale-[1.04] group-hover:opacity-100"
+                    className="max-h-[105px] max-w-[205px] object-contain opacity-90 transition-all duration-300 group-hover:scale-[1.04] group-hover:opacity-100
+          max-sm:max-h-[85px] max-sm:max-w-[180px]"
                   />
                 </div>
               ))}

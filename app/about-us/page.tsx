@@ -989,7 +989,7 @@ export default function AboutUsPage() {
                     ================================================= */}
 
                     <div
-                        className="absolute bottom-4 left-1/2 -translate-x-1/2 font-mono text-[9px] uppercase tracking-[0.25em] text-white/20"
+                        className="absolute bottom-3 md:bottom-10 left-1/2-translate-x-1/2 font-mono text-[9px] uppercase tracking-[0.25em] text-white/20"
                         style={{
                             opacity:
                                 timelineProgress > 0.9
@@ -1386,6 +1386,6 @@ export default function AboutUsPage() {
 
             </section>
 
-        </main>
+        </main >
     );
 }
