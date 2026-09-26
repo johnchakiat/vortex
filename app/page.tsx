@@ -1,26 +1,21 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ArrowRight,
   ArrowUpRight,
-  ArrowUpDown,
   Building2,
-  Droplets,
+  ClipboardCheck,
+  Fan,
   Flame,
-  Globe2,
-  Layers3,
-  Mail,
-  MapPin,
-  Phone,
+  Lightbulb,
   RadioTower,
-  Ruler,
-  Target,
-  Wind,
+  ShieldCheck,
+  Thermometer,
   Zap,
 } from "lucide-react";
 
-import Navbar from "@/components/Navbar";
+
 
 /* =========================================================
    HERO
@@ -29,35 +24,35 @@ import Navbar from "@/components/Navbar";
 const heroSlides = [
   {
     image:
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2200&q=85",
-    eyebrow: "Engineering Consultancy",
-    title: "Engineering the built environment.",
+      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=2200&q=85",
+    eyebrow: "Busbar & Electrical Maintenance",
+    title: "Keeping power systems running.",
     description:
-      "Integrated engineering consultancy across Vertical Transport, MEP and BIM — supporting projects from concept design through construction supervision.",
+      "Specialist busbar and electrical maintenance solutions designed to improve reliability, reduce downtime and keep critical systems operating safely.",
   },
   {
     image:
-      "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=2200&q=85",
-    eyebrow: "Performance / Precision",
-    title: "Designed for performance. Built for the future.",
+      "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=2200&q=85",
+    eyebrow: "Electrical Reliability",
+    title: "Power distribution you can depend on.",
     description:
-      "Technical expertise and coordinated engineering solutions designed to improve project performance at every stage.",
+      "From inspection and testing to repair and refurbishment, DeltaCare helps maintain the performance of essential electrical infrastructure.",
   },
   {
     image:
-      "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=2200&q=85",
-    eyebrow: "End-to-End Delivery",
-    title: "From concept to construction.",
+      "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=2200&q=85",
+    eyebrow: "Inspection / Testing / Repair",
+    title: "Detect problems before they become failures.",
     description:
-      "A coordinated engineering approach connecting design intent, BIM coordination and construction requirements.",
+      "Our maintenance approach combines technical inspection, testing and practical fault rectification to protect electrical systems and business continuity.",
   },
   {
     image:
-      "https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=2200&q=85",
-    eyebrow: "Technical Excellence",
-    title: "Precision behind every project.",
+      "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=2200&q=85",
+    eyebrow: "Complete Electrical Support",
+    title: "Built around reliability.",
     description:
-      "Engineering solutions built around technical accuracy, collaboration and practical project delivery.",
+      "Supporting busbar, switchgear, transformers, HVAC and testing requirements with focused technical service and responsive maintenance support.",
   },
 ];
 
@@ -68,128 +63,57 @@ const heroSlides = [
 const services = [
   {
     number: "01",
-    title: "Vertical Transport",
-    icon: ArrowUpDown,
+    title: "Busduct / Busbar Maintenance",
+    icon: Zap,
     image:
-      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1400&q=80",
+      "https://www.apsensing.com/uploads/media/1440x640/02/652-Key_visual_Bus-Duct-Systems_LowRes.jpg?v=1-7",
     description:
-      "Vertical transportation engineering and consultancy supporting efficient, safe and coordinated movement within buildings.",
+      "Inspection, maintenance, repair, testing and modification of busbar trunking systems, including tap-offs, joints and associated components.",
   },
   {
     number: "02",
-    title: "Electrical Systems",
-    icon: Zap,
+    title: "Switchgear Maintenance",
+    icon: ShieldCheck,
     image:
-      "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1400&q=80",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhB06En14oJkxbZfB7PyZylz3c9ejBQcPMhqGQaO5-L7-MHZ9nbdvHH2o&s=10",
     description:
-      "Electrical engineering solutions coordinated with architectural, mechanical and building requirements.",
+      "Maintenance and testing of switchgear panels including ACB, VFD, MCCB, capacitor banks and related electrical equipment.",
   },
   {
     number: "03",
-    title: "HVAC Systems",
-    icon: Wind,
+    title: "HVAC Maintenance",
+    icon: Fan,
     image:
-      "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1400&q=80",
+      "https://caddcentre.com/blog/wp-content/uploads/2018/08/HVAC-2.jpg",
     description:
-      "HVAC engineering focused on practical system coordination, performance and building comfort.",
+      "Preventive, corrective and emergency HVAC maintenance focused on system performance, efficiency and dependable operation.",
   },
   {
     number: "04",
-    title: "Public Health Engineering",
-    icon: Droplets,
+    title: "Transformer Maintenance",
+    icon: Thermometer,
     image:
-      "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=1400&q=80",
+      "https://vietnamtransformer.com/wp-content/uploads/2025/11/Essential-Maintenance-Tips-for-Transformers_1762943354_P1cCYXKR.jpg",
     description:
-      "Public health engineering solutions supporting water, drainage and coordinated building services.",
+      "Transformer inspection, testing, oil processing, diagnostics and maintenance services designed to support long-term reliability.",
   },
   {
     number: "05",
-    title: "Fire Protection",
-    icon: Flame,
+    title: "Aircraft Warning Lights",
+    icon: Lightbulb,
     image:
-      "https://images.unsplash.com/photo-1518391846015-55a9cc003b25?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1400&q=85",
     description:
-      "Fire protection engineering integrated into the wider building design and coordination process.",
+      "Installation, inspection, maintenance and replacement of aircraft warning and obstruction lighting systems for tall structures.",
   },
   {
     number: "06",
-    title: "ELV Systems",
-    icon: RadioTower,
+    title: "Testing & Commissioning",
+    icon: ClipboardCheck,
     image:
-      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80",
+      "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=1400&q=85",
     description:
-      "Extra-low-voltage systems coordinated with the building's technology, communication and operational requirements.",
-  },
-];
-
-/* =========================================================
-   TESTIMONIALS
-========================================================= */
-
-const testimonials = [
-  {
-    name: "David Richardson",
-    role: "Engineering Manager",
-    text: "Vortex Enveco Consultancy LLC demonstrated outstanding professionalism and technical capability throughout our project. Their Vertical Transport consultancy and BIM engineering solutions were extremely valuable in optimizing building performance. The team communicated effectively and provided clear technical guidance during the entire construction phase.",
-  },
-  {
-    name: "Sarah Thompson",
-    role: "Construction Manager",
-    text: "Working with VEC LLC has been a great experience. Their engineering team delivered reliable back-office support from India, helping us maintain high-quality standards and meet strict project timelines. Their deep understanding of MEP and BIM coordination significantly improved project efficiency and reduced potential design conflicts.",
-  },
-  {
-    name: "Michael Carter",
-    role: "Project Director",
-    text: "Vortex Enveco Consultancy LLC provided exceptional engineering consultancy for our commercial development project. Their expertise in Vertical Transport, MEP, and BIM engineering helped us streamline the design and coordination process. The team’s technical knowledge and attention to detail ensured that every stage of the project—from concept design to construction supervision—was executed efficiently and professionally.",
-  },
-  {
-    name: "James Walker",
-    role: "Technical Director",
-    text: "Vortex Enveco Consultancy LLC has been a reliable engineering partner for our projects. Their strong expertise in Vertical Transport, MEP, and BIM engineering solutions helped us achieve better coordination and technical accuracy throughout the design and construction stages. The team’s proactive approach, clear communication, and commitment to quality make them a trusted consultancy for complex engineering developments.",
-  },
-  {
-    name: "Emily Rodriguez",
-    role: "Development Manager",
-    text: "We were impressed by the dedication and expertise of VEC LLC. Their comprehensive engineering services and strong coordination between design and construction teams helped ensure smooth project execution. Their experience in handling complex engineering challenges makes them a reliable consultancy partner for large-scale developments.",
-  },
-];
-
-const testimonialImages = [
-  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=80",
-  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&q=80",
-  "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=500&q=80",
-  "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=500&q=80",
-  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=500&q=80",
-];
-
-/* =========================================================
-   PARTNERS
-========================================================= */
-
-const partners = [
-  {
-    name: "Hoods of Norway",
-    image: "/partners/hoods-of-norway.png",
-  },
-  {
-    name: "Pixel Craft Collective",
-    image: "/partners/pixel-craft-collective.png",
-  },
-  {
-    name: "To The Victor",
-    image: "/partners/to-the-victor.png",
-  },
-  {
-    name: "Chicago Shoemaker",
-    image: "/partners/chicago-shoemaker.png",
-  },
-  {
-    name: "Black and Smith",
-    image: "/partners/black-and-smith.png",
-  },
-  {
-    name: "Copenhagen Clothing",
-    image: "/partners/copenhagen-clothing.png",
+      "Electrical testing and commissioning for busducts, panels, switchgear, transformers and associated electrical systems.",
   },
 ];
 
@@ -199,10 +123,6 @@ const partners = [
 
 export default function Home() {
   const [activeSlide, setActiveSlide] = useState(0);
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
-  const [activePartner, setActivePartner] = useState(0);
-
-  const testimonialTrackRef = useRef<HTMLDivElement>(null);
 
   /* =========================================================
      HERO AUTO PLAY
@@ -226,72 +146,9 @@ export default function Home() {
     );
   };
 
-  /* =========================================================
-     TESTIMONIAL CONTROLS
-  ========================================================= */
-
-  const goToTestimonial = (index: number) => {
-    setActiveTestimonial(index);
-
-    const track = testimonialTrackRef.current;
-
-    if (!track) return;
-
-    const card = track.children[index] as HTMLElement | undefined;
-
-    if (!card) return;
-
-    card.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",
-      inline: "center",
-    });
-  };
-
-  const nextTestimonial = () => {
-    const next =
-      activeTestimonial === testimonials.length - 1
-        ? 0
-        : activeTestimonial + 1;
-
-    goToTestimonial(next);
-  };
-
-  const previousTestimonial = () => {
-    const previous =
-      activeTestimonial === 0
-        ? testimonials.length - 1
-        : activeTestimonial - 1;
-
-    goToTestimonial(previous);
-  };
-
-  /* =========================================================
-     PARTNER CONTROLS
-  ========================================================= */
-
-  const nextPartner = () => {
-    setActivePartner((current) => (current + 1) % partners.length);
-  };
-
-  const previousPartner = () => {
-    setActivePartner(
-      (current) => (current - 1 + partners.length) % partners.length
-    );
-  };
-
-  /*
-    Five logos are displayed at once.
-    The active index determines where the carousel starts.
-  */
-
-  const visiblePartners = Array.from({ length: 5 }, (_, offset) => {
-    return partners[(activePartner + offset) % partners.length];
-  });
-
   return (
     <main className="relative min-h-screen overflow-x-clip bg-[#07111f] text-[#172033]">
-      <Navbar />
+
 
       {/* =========================================================
           HERO
@@ -363,7 +220,7 @@ export default function Home() {
                   href="#about"
                   className="group inline-flex items-center gap-3 border border-white/40 bg-white/5 px-7 py-4 text-sm font-bold uppercase tracking-[0.12em] text-white backdrop-blur-sm transition-all duration-300 hover:border-white hover:bg-white hover:text-[#172033]"
                 >
-                  Discover Vortex
+                  Discover DeltaCare
 
                   <ArrowUpRight
                     size={17}
@@ -449,16 +306,17 @@ export default function Home() {
               <h2 className="max-w-2xl text-5xl font-bold leading-[0.98] tracking-[-0.05em] text-[#172033] sm:text-6xl lg:text-7xl">
                 Greetings from
                 <br />
-                <span className="text-[#0878df]">Vortex Enveco.</span>
+                <span className="text-[#0878df]">DeltaCare.</span>
               </h2>
             </div>
 
             <div className="flex items-end">
               <p className="max-w-2xl text-lg leading-8 text-[#667085] sm:text-xl">
-                Vortex Enveco Consultancy LLC is an engineering consultancy
-                specializing in Vertical Transport, MEP and BIM engineering
-                solutions, with a back office in India supporting projects from
-                concept design through construction supervision.
+                DeltaCare provides specialist maintenance and technical support
+                for electrical infrastructure, with a strong focus on busbar
+                and busduct systems. Our approach is built around safety,
+                reliability, system performance and reducing unnecessary
+                downtime.
               </p>
             </div>
           </div>
@@ -466,8 +324,8 @@ export default function Home() {
           <div className="mt-20 grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
             <div className="relative min-h-[520px] overflow-hidden">
               <img
-                src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1800&q=85"
-                alt="Modern architectural development"
+                src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1800&q=85"
+                alt="Electrical maintenance and engineering"
                 className="absolute inset-0 h-full w-full object-cover transition duration-700 hover:scale-105"
               />
 
@@ -476,16 +334,16 @@ export default function Home() {
               <div className="absolute bottom-8 left-8 right-8 flex items-end justify-between text-white">
                 <div>
                   <div className="mb-2 text-xs font-bold uppercase tracking-[0.2em] text-[#ffbd00]">
-                    Engineering / BIM
+                    Electrical Maintenance
                   </div>
 
                   <div className="text-2xl font-bold sm:text-3xl">
-                    Integrated expertise.
+                    Reliability starts with prevention.
                   </div>
                 </div>
 
                 <div className="hidden border border-white/30 p-3 sm:block">
-                  <Building2 size={25} />
+                  <Zap size={25} />
                 </div>
               </div>
             </div>
@@ -493,30 +351,30 @@ export default function Home() {
             <div className="flex flex-col justify-between border border-[#dfe7f0] bg-[#f5f8fc] p-8 sm:p-10">
               <div>
                 <div className="mb-8 flex items-center justify-between">
-                  <span className="vortex-label">Our approach</span>
+                  <span className="vortex-label">Our Approach</span>
 
                   <span className="font-mono text-xs text-[#98a2b3]">
-                    VEC / 01
+                    DTC / 01
                   </span>
                 </div>
 
                 <h3 className="max-w-md text-3xl font-bold leading-tight tracking-[-0.03em] text-[#172033] sm:text-4xl">
-                  Engineering decisions that work beyond the drawing.
+                  Maintenance that works beyond the checklist.
                 </h3>
 
                 <p className="mt-6 text-base leading-8 text-[#667085]">
-                  We bring multiple engineering disciplines together through
-                  coordinated design, BIM capability and practical project
-                  delivery.
+                  We focus on identifying potential issues, maintaining
+                  electrical equipment correctly and restoring systems quickly
+                  when faults occur.
                 </p>
               </div>
 
               <div className="mt-12 grid grid-cols-2 gap-px bg-[#dfe7f0]">
                 {[
-                  ["01", "Integrated"],
-                  ["02", "LOD 500"],
-                  ["03", "Global"],
-                  ["04", "End-to-End"],
+                  ["01", "Inspect"],
+                  ["02", "Maintain"],
+                  ["03", "Test"],
+                  ["04", "Restore"],
                 ].map(([number, label]) => (
                   <div key={number} className="bg-[#f5f8fc] p-5">
                     <div className="font-mono text-xs text-[#0878df]">
@@ -536,18 +394,18 @@ export default function Home() {
             {[
               {
                 number: "01",
-                title: "Concept",
-                icon: Target,
+                title: "Inspection",
+                icon: ClipboardCheck,
               },
               {
                 number: "02",
-                title: "Design",
-                icon: Ruler,
+                title: "Maintenance",
+                icon: ShieldCheck,
               },
               {
                 number: "03",
-                title: "Construction",
-                icon: Building2,
+                title: "Testing",
+                icon: Zap,
               },
             ].map((item) => {
               const Icon = item.icon;
@@ -575,6 +433,173 @@ export default function Home() {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      {/* =========================================================
+    OUR SOLUTIONS
+========================================================= */}
+
+      <section
+        id="solutions"
+        className="relative overflow-hidden bg-[#07111f] py-20 text-white sm:py-24 lg:py-32"
+      >
+        {/* Technical grid */}
+        <div
+          className="pointer-events-none absolute inset-0 opacity-[0.055]"
+          style={{
+            backgroundImage: `
+        linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px)
+      `,
+            backgroundSize: "80px 80px",
+          }}
+        />
+
+        {/* Ambient glow */}
+        <div className="pointer-events-none absolute -right-40 top-1/2 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-[#0878df]/10 blur-[140px]" />
+
+        <div className="vortex-container relative">
+
+          {/* Header */}
+          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+            <div>
+              <div className="mb-6 flex items-center gap-4">
+                <span className="h-px w-12 bg-[#ffbd00]" />
+
+                <span className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-[#ffbd00]">
+                  Our Solutions
+                </span>
+              </div>
+
+              <h2 className="max-w-4xl text-5xl font-bold leading-[0.92] tracking-[-0.055em] sm:text-6xl lg:text-8xl">
+                Power systems
+                <br />
+                <span className="text-[#0878df]">need protection.</span>
+              </h2>
+            </div>
+
+            <div className="lg:pb-2">
+              <p className="max-w-xl text-base leading-8 text-white/55 sm:text-lg">
+                Every building depends on electrical infrastructure working
+                continuously. DeltaCare provides maintenance solutions designed
+                around reliability, safety and long-term performance.
+              </p>
+            </div>
+          </div>
+
+          {/* Solution list */}
+          <div className="mt-16 border-t border-white/10">
+
+            {[
+              {
+                number: "01",
+                title: "Industrial",
+                subtitle: "Critical power infrastructure",
+                description:
+                  "Maintenance and technical support for industrial facilities where electrical reliability and continuity are essential.",
+                tags: ["Busbar", "Switchgear", "Transformers"],
+              },
+              {
+                number: "02",
+                title: "Commercial",
+                subtitle: "Power for occupied buildings",
+                description:
+                  "Specialist electrical maintenance for offices, towers, retail developments and commercial facilities.",
+                tags: ["Inspection", "Testing", "Maintenance"],
+              },
+              {
+                number: "03",
+                title: "Residential",
+                subtitle: "Reliable building infrastructure",
+                description:
+                  "Electrical maintenance and support for residential and mixed-use developments, helping keep essential systems operating safely.",
+                tags: ["Busduct", "Diagnostics", "Repair"],
+              },
+            ].map((solution) => (
+              <div
+                key={solution.number}
+                className="group relative border-b border-white/10 py-9 transition-all duration-500 hover:bg-white/[0.025] sm:py-11 lg:py-12"
+              >
+                <div className="grid gap-7 lg:grid-cols-[90px_1fr_1.1fr_auto] lg:items-center lg:gap-10">
+
+                  {/* Number */}
+                  <div className="font-mono text-sm font-bold tracking-[0.15em] text-white/25 transition-colors duration-300 group-hover:text-[#ffbd00]">
+                    {solution.number}
+                  </div>
+
+                  {/* Main title */}
+                  <div>
+                    <div className="mb-2 font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[#0878df]">
+                      {solution.subtitle}
+                    </div>
+
+                    <h3 className="text-4xl font-bold tracking-[-0.04em] text-white transition-transform duration-500 group-hover:translate-x-2 sm:text-5xl lg:text-6xl">
+                      {solution.title}
+                    </h3>
+                  </div>
+
+                  {/* Description */}
+                  <div>
+                    <p className="max-w-xl text-sm leading-7 text-white/45 sm:text-base">
+                      {solution.description}
+                    </p>
+
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {solution.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="border border-white/10 px-3 py-1.5 font-mono text-[9px] font-bold uppercase tracking-[0.12em] text-white/35"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Arrow */}
+                  <div className="flex h-12 w-12 items-center justify-center border border-white/10 text-white/25 transition-all duration-500 group-hover:border-[#0878df] group-hover:bg-[#0878df] group-hover:text-white">
+                    <ArrowUpRight
+                      size={19}
+                      className="transition-transform duration-500 group-hover:-translate-y-1 group-hover:translate-x-1"
+                    />
+                  </div>
+
+                </div>
+
+                {/* Hover line */}
+                <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-[#0878df] transition-all duration-700 group-hover:w-full" />
+              </div>
+            ))}
+          </div>
+
+          {/* Bottom statement */}
+          <div className="mt-10 flex flex-col justify-between gap-6 sm:flex-row sm:items-center">
+            <div className="flex items-center gap-4">
+              <div className="flex -space-x-1">
+                <span className="h-2 w-2 rounded-full bg-[#0878df]" />
+                <span className="h-2 w-2 rounded-full bg-[#ffbd00]" />
+                <span className="h-2 w-2 rounded-full bg-white/30" />
+              </div>
+
+              <span className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-white/35">
+                Maintenance · Testing · Reliability
+              </span>
+            </div>
+
+            <a
+              href="/services"
+              className="group flex w-fit items-center gap-3 text-xs font-bold uppercase tracking-[0.15em] text-white transition-colors hover:text-[#0878df]"
+            >
+              Explore our services
+
+              <ArrowRight
+                size={16}
+                className="transition-transform duration-300 group-hover:translate-x-1"
+              />
+            </a>
+          </div>
+
         </div>
       </section>
 
@@ -607,16 +632,15 @@ export default function Home() {
               </div>
 
               <h2 className="max-w-2xl text-5xl font-bold leading-[0.95] tracking-[-0.05em] text-[#172033] sm:text-6xl lg:text-7xl">
-                Engineering
+                Electrical
                 <br />
-                <span className="text-[#0878df]">every layer.</span>
+                <span className="text-[#0878df]">maintenance.</span>
               </h2>
             </div>
 
             <p className="max-w-xl text-lg leading-8 text-[#667085] lg:ml-auto">
-              A coordinated suite of engineering disciplines designed to
-              support complex building projects from concept through
-              construction.
+              Specialist maintenance and technical services supporting
+              electrical systems, equipment and critical infrastructure.
             </p>
           </div>
 
@@ -626,8 +650,9 @@ export default function Home() {
               const large = index === 0 || index === 3;
 
               return (
-                <article
+                <a
                   key={service.title}
+                  href="/services"
                   className={`group relative overflow-hidden border border-[#dce5ef] bg-white ${large ? "lg:col-span-7" : "lg:col-span-5"
                     }`}
                 >
@@ -665,7 +690,7 @@ export default function Home() {
                       </div>
 
                       <div className="mt-5 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.16em] text-[#ffbd00]">
-                        Explore discipline
+                        Explore service
 
                         <ArrowRight
                           size={16}
@@ -674,7 +699,7 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
-                </article>
+                </a>
               );
             })}
           </div>
@@ -682,279 +707,27 @@ export default function Home() {
       </section>
 
       {/* =========================================================
-          TESTIMONIALS
+          WHY PARTNER WITH US
       ========================================================= */}
-
-      <section
-        id="testimonials"
-        className="relative overflow-hidden bg-white py-20 sm:py-24 lg:py-28"
-      >
-        <div className="vortex-container">
-          <div className="mx-auto max-w-4xl text-center">
-            <div className="mb-4 flex items-center justify-center gap-4">
-              <span className="h-px w-10 bg-[#0878df]" />
-
-              <span className="vortex-label">Client Testimonials</span>
-
-              <span className="h-px w-10 bg-[#0878df]" />
-            </div>
-
-            <h2 className="font-serif text-4xl font-bold tracking-[-0.03em] text-[#111111] sm:text-5xl lg:text-6xl">
-              Trusted by Our Clients
-            </h2>
-
-            <p className="mx-auto mt-5 max-w-3xl text-base leading-7 text-[#667085] sm:text-lg">
-              Real feedback from professionals who have partnered with us.
-              Our engineering expertise and commitment to excellence ensure
-              every project is delivered with precision and reliability.
-            </p>
-          </div>
-
-          <div className="relative mt-14">
-            <button
-              type="button"
-              aria-label="Previous testimonial"
-              onClick={previousTestimonial}
-              className="absolute left-0 top-1/2 z-20 hidden h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center border border-[#cfd7e2] bg-white text-[#0878df] shadow-sm transition-all duration-300 hover:border-[#0878df] hover:bg-[#0878df] hover:text-white lg:flex"
-            >
-              <ArrowRight className="rotate-180" size={22} />
-            </button>
-
-            <button
-              type="button"
-              aria-label="Next testimonial"
-              onClick={nextTestimonial}
-              className="absolute right-0 top-1/2 z-20 hidden h-12 w-12 translate-x-1/2 -translate-y-1/2 items-center justify-center border border-[#cfd7e2] bg-white text-[#0878df] shadow-sm transition-all duration-300 hover:border-[#0878df] hover:bg-[#0878df] hover:text-white"
-            >
-              <ArrowRight size={22} />
-            </button>
-
-            <div
-              ref={testimonialTrackRef}
-              className="flex snap-x snap-mandatory gap-8 overflow-x-auto px-4 pb-4 lg:gap-12 lg:px-16"
-              style={{
-                scrollbarWidth: "none",
-                msOverflowStyle: "none",
-              }}
-            >
-              {testimonials.map((testimonial, index) => {
-                const isActive = index === activeTestimonial;
-
-                return (
-                  <article
-                    key={testimonial.name}
-                    onClick={() => goToTestimonial(index)}
-                    className={`min-w-[82%] cursor-pointer snap-center text-center transition-all duration-500 sm:min-w-[60%] lg:min-w-[calc((100%-6rem)/3)] lg:flex-1 ${isActive
-                      ? "scale-100 opacity-100"
-                      : "scale-[0.96] opacity-60 hover:opacity-90"
-                      }`}
-                  >
-                    <div
-                      className={`mx-auto flex h-[128px] w-[128px] items-center justify-center overflow-hidden rounded-full bg-[#eef3f8] transition-all duration-500 ${isActive
-                        ? "border-[5px] border-white shadow-[0_10px_30px_rgba(0,0,0,0.12)] ring-2 ring-[#0878df]/30"
-                        : "border-[5px] border-white shadow-[0_5px_18px_rgba(0,0,0,0.08)] ring-1 ring-[#dce4ec]"
-                        }`}
-                    >
-                      <img
-                        src={testimonialImages[index]}
-                        alt={testimonial.name}
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
-
-                    <h3
-                      className={`mt-7 font-serif font-bold transition-colors duration-300 ${isActive
-                        ? "text-2xl text-[#30343b]"
-                        : "text-xl text-[#555b63]"
-                        }`}
-                    >
-                      {testimonial.name}
-                    </h3>
-
-                    <div
-                      className={`mx-auto mt-3 h-[2px] transition-all duration-300 ${isActive
-                        ? "w-10 bg-[#ffbd00]"
-                        : "w-7 bg-[#d8dee5]"
-                        }`}
-                    />
-
-                    <p
-                      className={`mx-auto mt-6 max-w-sm text-[15px] leading-7 transition-colors duration-300 sm:text-base ${isActive ? "text-[#4f5660]" : "text-[#7a818a]"
-                        }`}
-                    >
-                      “
-                      {testimonial.text.length > 190
-                        ? `${testimonial.text.substring(0, 190)}...`
-                        : testimonial.text}
-                      ”
-                    </p>
-
-                    <div
-                      className={`mt-7 text-sm transition-colors duration-300 ${isActive
-                        ? "font-medium text-[#667085]"
-                        : "text-[#8b929b]"
-                        }`}
-                    >
-                      {testimonial.role}
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
-
-            <div className="mt-6 flex justify-center gap-3 lg:hidden">
-              <button
-                type="button"
-                onClick={previousTestimonial}
-                className="flex h-11 w-11 items-center justify-center border border-[#d4dce5] text-[#0878df] transition hover:bg-[#0878df] hover:text-white"
-              >
-                <ArrowRight className="rotate-180" size={19} />
-              </button>
-
-              <button
-                type="button"
-                onClick={nextTestimonial}
-                className="flex h-11 w-11 items-center justify-center border border-[#d4dce5] text-[#0878df] transition hover:bg-[#0878df] hover:text-white"
-              >
-                <ArrowRight size={19} />
-              </button>
-            </div>
-
-            <div className="mt-8 flex items-center justify-center gap-2">
-              {testimonials.map((testimonial, index) => (
-                <button
-                  key={testimonial.name}
-                  type="button"
-                  aria-label={`Show ${testimonial.name}'s testimonial`}
-                  onClick={() => goToTestimonial(index)}
-                  className={`rounded-full transition-all duration-300 ${index === activeTestimonial
-                    ? "h-2.5 w-7 bg-[#0878df]"
-                    : "h-2.5 w-2.5 bg-[#d0d5da] hover:bg-[#0878df]/50"
-                    }`}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================
-          OUR PARTNERS
-      ========================================================= */}
-
-      <section className="relative overflow-hidden bg-[#f1f1f1] py-16 sm:py-20">
-        <div className="vortex-container">
-          {/* Heading */}
-
-          <div className="mx-auto max-w-7xl text-center">
-            <span className="inline-flex rounded-full bg-[#ffbd00] px-5 py-2 font-serif text-[16px] font-bold text-black">
-              Our Partners
-            </span>
-
-            <h2 className="mt-3 font-serif text-4xl font-bold tracking-[-0.025em] text-black sm:text-5xl lg:text-[52px]">
-              Working With Industry Leaders
-            </h2>
-
-            <p className="mx-auto mt-4 max-w-6xl text-[16px] leading-7 tracking-[0.02em] text-[#667085]">
-              We are proud to work alongside reputable partners who support
-              our mission of delivering innovative Vertical Transport, MEP,
-              and BIM engineering solutions.
-            </p>
-          </div>
-
-          {/* Carousel */}
-
-          <div className="relative mt-8">
-            {/* Arrows */}
-
-            <div className="mb-5 flex justify-end gap-2">
-              <button
-                type="button"
-                aria-label="Previous partners"
-                onClick={previousPartner}
-                className="flex h-10 w-10 items-center justify-center border border-[#bfc4c9] bg-[#f1f1f1] text-[#9aa3ab] transition-all duration-300 hover:border-[#0878df] hover:bg-white hover:text-[#0878df]"
-              >
-                <span className="relative -top-[1px] text-[31px] leading-none">
-                  ‹
-                </span>
-              </button>
-
-              <button
-                type="button"
-                aria-label="Next partners"
-                onClick={nextPartner}
-                className="flex h-10 w-10 items-center justify-center border border-[#bfc4c9] bg-[#f1f1f1] text-[#9aa3ab] transition-all duration-300 hover:border-[#0878df] hover:bg-white hover:text-[#0878df]"
-              >
-                <span className="relative -top-[1px] text-[31px] leading-none">
-                  ›
-                </span>
-              </button>
-            </div>
-
-            {/* Logo Cards */}
-
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-              {visiblePartners.map((partner, index) => (
-                <div
-                  key={`${partner.name}-${index}`}
-                  className="group flex h-[158px] items-center justify-center overflow-hidden border border-[#d9d9d9] bg-[#f7f7f7] px-8 transition-all duration-300 hover:bg-white hover:shadow-md
-        max-sm:h-[145px] max-sm:px-5"
-                >
-                  <img
-                    src={partner.image}
-                    alt={partner.name}
-                    className="max-h-[105px] max-w-[205px] object-contain opacity-90 transition-all duration-300 group-hover:scale-[1.04] group-hover:opacity-100
-          max-sm:max-h-[85px] max-sm:max-w-[180px]"
-                  />
-                </div>
-              ))}
-            </div>
-
-            {/* Pagination */}
-
-            <div className="mt-5 flex justify-center gap-2.5">
-              {partners.map((partner, index) => (
-                <button
-                  key={partner.name}
-                  type="button"
-                  aria-label={`Show partner ${index + 1}`}
-                  onClick={() => setActivePartner(index)}
-                  className={`h-[14px] w-[14px] rounded-full transition-all duration-300 ${index === activePartner
-                    ? "bg-[#16a085]"
-                    : "bg-[#d8d8d8] hover:bg-[#bfc4c9]"
-                    }`}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================
-    WHY PARTNER WITH US
-========================================================= */}
 
       <section
         id="why-partner"
         className="relative overflow-hidden bg-[#07111f] py-20 text-white sm:py-24 lg:py-28"
       >
-        {/* Technical grid */}
         <div
           className="pointer-events-none absolute inset-0 opacity-20"
           style={{
             backgroundImage: `
-        linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px)
-      `,
+              linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px)
+            `,
             backgroundSize: "72px 72px",
           }}
         />
 
-        {/* Soft engineering glow */}
         <div className="pointer-events-none absolute -right-40 top-20 h-[500px] w-[500px] rounded-full bg-[#0878df]/10 blur-[120px]" />
 
         <div className="vortex-container relative">
-          {/* Heading */}
           <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-end">
             <div>
               <div className="mb-5 flex items-center gap-4">
@@ -966,50 +739,49 @@ export default function Home() {
               </div>
 
               <h2 className="max-w-3xl text-5xl font-bold leading-[0.95] tracking-[-0.05em] text-white sm:text-6xl lg:text-7xl">
-                Engineering expertise
+                Maintenance expertise
                 <br />
-                <span className="text-[#0878df]">that delivers.</span>
+                <span className="text-[#0878df]">that protects.</span>
               </h2>
             </div>
 
             <div className="lg:pb-2">
               <p className="max-w-xl text-base leading-8 text-white/60 sm:text-lg">
-                We combine multidisciplinary engineering expertise, advanced BIM
-                capabilities and international project experience to deliver
-                coordinated solutions from concept through construction.
+                DeltaCare focuses on practical maintenance, inspection and
+                technical support designed to keep electrical infrastructure
+                safe, dependable and operational.
               </p>
             </div>
           </div>
 
-          {/* Capability cards */}
           <div className="mt-14 grid gap-px bg-white/10 md:grid-cols-2 lg:grid-cols-4">
             {[
               {
                 number: "01",
-                title: "Integrated Expertise",
+                title: "Busbar Specialists",
                 description:
-                  "Vertical Transport, MEP and BIM expertise brought together under one coordinated engineering approach.",
+                  "Focused technical expertise across busduct and busbar systems, from inspection and maintenance to repair and modification.",
                 accent: "blue",
               },
               {
                 number: "02",
-                title: "BIM up to LOD 500",
+                title: "Preventive Maintenance",
                 description:
-                  "Advanced BIM capabilities supporting detailed coordination, documentation and construction-ready models.",
+                  "Regular inspection and maintenance designed to identify potential problems before they become costly failures.",
                 accent: "gold",
               },
               {
                 number: "03",
-                title: "Multi-Sector Portfolio",
+                title: "Testing & Diagnostics",
                 description:
-                  "Experience across diverse building sectors and complex engineering requirements.",
+                  "Technical testing and diagnostic services supporting electrical system performance, safety and reliability.",
                 accent: "blue",
               },
               {
                 number: "04",
-                title: "Global Delivery",
+                title: "Reduced Downtime",
                 description:
-                  "A delivery model designed to support projects across locations while maintaining quality and coordination.",
+                  "Practical fault finding, repair and maintenance support focused on helping systems return to reliable operation.",
                 accent: "gold",
               },
             ].map((item) => (
@@ -1017,7 +789,6 @@ export default function Home() {
                 key={item.number}
                 className="group relative min-h-[290px] overflow-hidden bg-[#0b1929] p-7 transition-all duration-500 hover:bg-[#10243a] sm:p-8"
               >
-                {/* Top accent */}
                 <div
                   className={`absolute left-0 top-0 h-[3px] w-full origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100 ${item.accent === "gold"
                     ? "bg-[#ffbd00]"
@@ -1055,7 +826,7 @@ export default function Home() {
                   />
 
                   <span className="font-mono text-[9px] font-semibold uppercase tracking-[0.18em] text-white/30">
-                    VEC / ENGINEERING
+                    DTC / ELECTRICAL
                   </span>
                 </div>
 
@@ -1067,17 +838,16 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Bottom statement */}
           <div className="mt-12 border-t border-white/10 pt-8">
             <div className="flex flex-col justify-between gap-7 sm:flex-row sm:items-center">
               <div>
                 <span className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-[#ffbd00]">
-                  Built for complex projects
+                  Built around reliability
                 </span>
 
                 <p className="mt-2 text-[15px] text-white/45">
-                  One coordinated approach across disciplines, teams and project
-                  stages.
+                  Practical electrical maintenance for critical systems,
+                  equipment and infrastructure.
                 </p>
               </div>
 
@@ -1085,7 +855,7 @@ export default function Home() {
                 href="#contact"
                 className="group inline-flex w-fit items-center gap-3 border border-[#0878df] px-6 py-3.5 text-[13px] font-bold uppercase tracking-[0.12em] text-white transition-all duration-300 hover:bg-[#0878df]"
               >
-                Discuss Your Project
+                Discuss Your Requirements
 
                 <ArrowUpRight
                   size={17}
@@ -1098,32 +868,29 @@ export default function Home() {
       </section>
 
       {/* =========================================================
-    CONTACT
-========================================================= */}
+          CONTACT
+      ========================================================= */}
 
       <section
         id="contact"
         className="relative overflow-hidden bg-[#07111f] py-20 text-white sm:py-24 lg:py-28"
       >
-        {/* Continuing technical grid */}
         <div
           className="pointer-events-none absolute inset-0 opacity-20"
           style={{
             backgroundImage: `
-        linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)
-      `,
+              linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)
+            `,
             backgroundSize: "72px 72px",
           }}
         />
 
-        {/* Ambient blue glow */}
         <div className="pointer-events-none absolute -left-48 top-1/3 h-[550px] w-[550px] rounded-full bg-[#0878df]/10 blur-[140px]" />
 
         <div className="pointer-events-none absolute -right-32 bottom-0 h-[400px] w-[400px] rounded-full bg-[#0878df]/10 blur-[120px]" />
 
         <div className="vortex-container relative">
-          {/* Section heading */}
           <div className="max-w-4xl">
             <div className="mb-6 flex items-center gap-4">
               <span className="h-px w-12 bg-[#ffbd00]" />
@@ -1134,24 +901,20 @@ export default function Home() {
             </div>
 
             <h2 className="max-w-4xl text-5xl font-bold leading-[0.95] tracking-[-0.05em] text-white sm:text-6xl lg:text-7xl">
-              Let&apos;s build something
+              Let&apos;s keep your systems
               <br />
-              <span className="text-[#0878df]">exceptional.</span>
+              <span className="text-[#0878df]">running reliably.</span>
             </h2>
 
             <p className="mt-7 max-w-2xl text-base leading-8 text-white/55 sm:text-lg">
-              Tell us about your project and our engineering team will get back to
-              you to discuss how Vortex Enveco Consultancy can support your
-              requirements.
+              Tell us about your electrical maintenance requirements and our
+              team can discuss the support your project needs.
             </p>
           </div>
 
-          {/* Contact layout */}
           <div className="mt-14 grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-16">
-            {/* Contact information */}
             <div>
               <div className="border-t border-white/10">
-                {/* Office */}
                 <div className="group border-b border-white/10 py-7">
                   <div className="flex items-start justify-between gap-6">
                     <div>
@@ -1174,7 +937,6 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Phone */}
                 <div className="group border-b border-white/10 py-7">
                   <div className="flex items-start justify-between gap-6">
                     <div>
@@ -1200,7 +962,6 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Email */}
                 <div className="group border-b border-white/10 py-7">
                   <div className="flex items-start justify-between gap-6">
                     <div>
@@ -1227,19 +988,17 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Engineering statement */}
               <div className="mt-9 border border-white/10 bg-[#0b1929] p-6">
                 <span className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-[#0878df]">
-                  VEC / ENGINEERING
+                  DTC / ELECTRICAL
                 </span>
 
                 <p className="mt-3 text-sm leading-7 text-white/45">
-                  Vertical Transport · MEP · BIM
+                  Busbar · Switchgear · Transformers · Testing
                 </p>
               </div>
             </div>
 
-            {/* Form */}
             <div className="border border-white/10 bg-[#0b1929] p-6 sm:p-8 lg:p-10">
               <div className="mb-8 flex items-center justify-between border-b border-white/10 pb-6">
                 <div>
@@ -1248,12 +1007,12 @@ export default function Home() {
                   </span>
 
                   <h3 className="mt-2 text-2xl font-bold text-white">
-                    Tell us about your project
+                    Tell us about your requirements
                   </h3>
                 </div>
 
                 <span className="hidden font-mono text-[10px] tracking-[0.16em] text-white/25 sm:block">
-                  VEC / 01
+                  DTC / 01
                 </span>
               </div>
 
@@ -1319,15 +1078,15 @@ export default function Home() {
                   <textarea
                     id="contact-message"
                     rows={6}
-                    placeholder="Tell us about your project, requirements or engineering needs..."
+                    placeholder="Tell us about your busbar, electrical maintenance or testing requirements..."
                     className="w-full resize-none border border-white/10 bg-[#07111f] px-4 py-3.5 text-sm text-white outline-none transition-all duration-300 placeholder:text-white/20 focus:border-[#0878df] focus:ring-1 focus:ring-[#0878df]/30"
                   />
                 </div>
 
                 <div className="flex flex-col justify-between gap-5 border-t border-white/10 pt-6 sm:flex-row sm:items-center">
                   <p className="max-w-sm text-xs leading-6 text-white/30">
-                    We&apos;ll use the information provided only to respond to your
-                    enquiry.
+                    We&apos;ll use the information provided only to respond to
+                    your enquiry.
                   </p>
 
                   <button
@@ -1348,268 +1107,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* =========================================================
-          FOOTER
-      ========================================================= */}
 
-      <footer className="relative overflow-hidden bg-black text-white">
-        {/* subtle engineering grid */}
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.035]"
-          style={{
-            backgroundImage: `
-        linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)
-      `,
-            backgroundSize: "80px 80px",
-          }}
-        />
-
-        <div className="vortex-container relative">
-          <div className="grid gap-12 py-16 sm:py-20 lg:grid-cols-[1.35fr_0.7fr_0.95fr_1.25fr] lg:gap-10">
-
-            {/* About */}
-            <div className="max-w-md">
-              <a
-                href="/"
-                className="group inline-block"
-                aria-label="Vortex Enveco home"
-              >
-                <div className="relative">
-                  <img
-                    src="/vortex-logo.png"
-                    alt="Vortex Enveco Consultancy LLC"
-                    className="h-auto w-[245px] object-contain"
-                  />
-
-                  <span className="absolute bottom-[-6px] left-0 h-[2px] w-0 bg-[#ffbd00] transition-all duration-500 group-hover:w-[88%]" />
-                </div>
-              </a>
-
-              <div className="mt-8 flex items-center gap-3">
-                <span className="h-px w-8 bg-[#ffbd00]" />
-
-                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[#ffbd00]">
-                  Engineering Consultancy
-                </span>
-              </div>
-
-              <p className="mt-5 max-w-sm text-[14px] leading-7 text-white/40">
-                VEC LLC is an engineering consultancy specialising in Vertical
-                Transport, MEP and BIM engineering solutions. With extensive
-                experience, we provide comprehensive engineering services from
-                concept design to construction supervision.
-              </p>
-
-              <div className="mt-7 flex items-center gap-2">
-                {[
-                  ["Facebook", "f"],
-                  ["X", "X"],
-                  ["YouTube", "YT"],
-                  ["Instagram", "IG"],
-                ].map(([label, short]) => (
-                  <a
-                    key={label}
-                    href="#"
-                    aria-label={label}
-                    className="flex h-9 min-w-9 items-center justify-center border border-white/10 px-2.5 font-mono text-[10px] font-bold uppercase tracking-[0.08em] text-white/40 transition-all duration-300 hover:border-[#0878df] hover:bg-[#0878df] hover:text-white"
-                  >
-                    {short}
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            {/* Quick Links */}
-            <div>
-              <div className="mb-7 flex items-center gap-3">
-                <span className="h-5 w-[2px] bg-[#ffbd00]" />
-
-                <h3 className="font-serif text-lg font-bold text-white">
-                  Quick Links
-                </h3>
-              </div>
-
-              <nav className="flex flex-col gap-4">
-                {[
-                  ["Home", "/"],
-                  ["About Us", "#about"],
-                  ["Our Blog", "#blog"],
-                  ["Our Services", "#services"],
-                  ["Contact", "#contact"],
-                ].map(([label, href]) => (
-                  <a
-                    key={label}
-                    href={href}
-                    className="group flex w-fit items-center gap-2 text-[14px] text-white/40 transition-colors duration-300 hover:text-white"
-                  >
-                    <span className="h-px w-0 bg-[#0878df] transition-all duration-300 group-hover:w-4" />
-                    {label}
-                  </a>
-                ))}
-              </nav>
-            </div>
-
-            {/* Services */}
-            <div>
-              <div className="mb-7 flex items-center gap-3">
-                <span className="h-5 w-[2px] bg-[#ffbd00]" />
-
-                <h3 className="font-serif text-lg font-bold text-white">
-                  Services
-                </h3>
-              </div>
-
-              <nav className="flex flex-col gap-4">
-                {[
-                  "Vertical Transport",
-                  "Electrical Systems",
-                  "HVAC Systems",
-                  "Public Health Eng",
-                  "Fire Protection",
-                  "ELV Systems",
-                ].map((service) => (
-                  <a
-                    key={service}
-                    href="#services"
-                    className="group flex w-fit items-center gap-2 text-[14px] text-white/40 transition-colors duration-300 hover:text-white"
-                  >
-                    <span className="h-px w-0 bg-[#0878df] transition-all duration-300 group-hover:w-4" />
-                    {service}
-                  </a>
-                ))}
-              </nav>
-            </div>
-
-            {/* Contact */}
-            <div>
-              <div className="mb-7 flex items-center gap-3">
-                <span className="h-5 w-[2px] bg-[#ffbd00]" />
-
-                <h3 className="font-serif text-lg font-bold text-white">
-                  Get In Touch
-                </h3>
-              </div>
-
-              <div className="space-y-3">
-
-                {/* Phone */}
-                <a
-                  href="tel:+971504242468"
-                  className="group flex items-center gap-4 border border-white/10 bg-white/[0.025] p-4 transition-all duration-300 hover:border-[#0878df]/50 hover:bg-[#0878df]/[0.08]"
-                >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-[#0878df] text-white transition-all duration-300 group-hover:bg-[#ffbd00] group-hover:text-black">
-                    <Phone size={17} />
-                  </div>
-
-                  <div className="min-w-0">
-                    <span className="block font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-[#ffbd00]">
-                      Phone
-                    </span>
-
-                    <span className="mt-1 block text-[14px] text-white/70">
-                      050 424 2468
-                    </span>
-                  </div>
-                </a>
-
-                {/* Address */}
-                <div className="group flex items-center gap-4 border border-white/10 bg-white/[0.025] p-4 transition-all duration-300 hover:border-[#0878df]/50 hover:bg-[#0878df]/[0.08]">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-[#0878df] text-white transition-all duration-300 group-hover:bg-[#ffbd00] group-hover:text-black">
-                    <MapPin size={17} />
-                  </div>
-
-                  <div className="min-w-0">
-                    <span className="block font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-[#ffbd00]">
-                      Office
-                    </span>
-
-                    <span className="mt-1 block text-[13px] leading-5 text-white/70">
-                      Jamal Al Muhairi Building,
-                      <br />
-                      Office 101, Al Garhoud, Dubai
-                    </span>
-                  </div>
-                </div>
-
-                {/* Email */}
-                <a
-                  href="mailto:info@vortexenveco.com"
-                  className="group flex items-center gap-4 border border-white/10 bg-white/[0.025] p-4 transition-all duration-300 hover:border-[#0878df]/50 hover:bg-[#0878df]/[0.08]"
-                >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center bg-[#0878df] text-white transition-all duration-300 group-hover:bg-[#ffbd00] group-hover:text-black">
-                    <Mail size={17} />
-                  </div>
-
-                  <div className="min-w-0">
-                    <span className="block font-mono text-[9px] font-bold uppercase tracking-[0.16em] text-[#ffbd00]">
-                      Email
-                    </span>
-
-                    <span className="mt-1 block break-all text-[13px] text-white/70">
-                      info@vortexenveco.com
-                    </span>
-                  </div>
-                </a>
-
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom divider */}
-          <div className="h-px w-full bg-white/10" />
-
-          {/* Copyright */}
-          <div className="flex flex-col justify-between gap-5 py-6 sm:flex-row sm:items-center">
-            <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/30">
-              © 2026 Vortexenveco. All Rights Reserved
-            </p>
-
-            <div className="flex items-center gap-5">
-              <a
-                href="#"
-                className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/30 transition-colors hover:text-white"
-              >
-                Privacy
-              </a>
-
-              <span className="h-3 w-px bg-white/10" />
-
-              <a
-                href="#"
-                className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/30 transition-colors hover:text-white"
-              >
-                Terms
-              </a>
-
-              <span className="h-3 w-px bg-white/10" />
-
-              <span className="font-mono text-[10px] uppercase tracking-[0.12em] text-[#0878df]">
-                VEC / DUBAI
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* WhatsApp */}
-        <a
-          href="https://wa.me/971504242468"
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Chat with Vortex Enveco on WhatsApp"
-          className="group fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_10px_35px_rgba(0,0,0,0.45)] transition-all duration-300 hover:scale-110 hover:shadow-[0_12px_40px_rgba(37,211,102,0.3)]"
-        >
-          <svg
-            viewBox="0 0 32 32"
-            className="h-7 w-7 fill-current"
-            aria-hidden="true"
-          >
-            <path d="M19.11 17.21c-.28-.14-1.64-.81-1.9-.9-.26-.1-.45-.14-.64.14-.19.28-.73.9-.9 1.08-.17.19-.33.21-.61.07-.28-.14-1.18-.44-2.25-1.39-.83-.74-1.39-1.65-1.55-1.93-.16-.28-.02-.43.12-.57.12-.12.28-.33.42-.5.14-.17.19-.28.28-.47.09-.19.05-.35-.02-.5-.07-.14-.64-1.54-.87-2.11-.23-.55-.46-.48-.64-.49h-.54c-.19 0-.5.07-.76.35-.26.28-1 1-.1 2.43.9 1.43 1.72 2.48 3.04 3.1 1.31.63 1.31.42 1.55.39.24-.02.77-.31.88-.61.11-.3.11-.55.08-.61-.03-.05-.1-.08-.21-.14z" />
-
-            <path d="M16 3a13 13 0 0 0-11.25 19.5L3 29l6.66-1.7A13 13 0 1 0 16 3zm0 23.7c-2.1 0-4.15-.56-5.95-1.62l-.43-.25-3.95 1.01 1.05-3.84-.28-.45A10.7 10.7 0 1 1 16 26.7z" />
-          </svg>
-        </a>
-      </footer>
     </main>
   );
 }

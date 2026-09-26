@@ -3,87 +3,89 @@
 import { useEffect, useRef, useState } from "react";
 import {
     ArrowDown,
+    ArrowLeft,
+    ArrowRight,
     ArrowUpRight,
-    Award,
-    Building2,
-    Compass,
-    Eye,
-    Lightbulb,
-    Target,
-    Users,
+    CheckCircle2,
+    ClipboardCheck,
+    Gauge,
+    ShieldCheck,
+    Wrench,
+    Zap,
 } from "lucide-react";
 
 import Navbar from "@/components/Navbar";
 
+{/* =======================================================
+    ABOUT US HERO
+======================================================= */}
+
+<section className="relative flex min-h-[480px] items-center overflow-hidden bg-[#07111f]">
+
+    <div
+        className="pointer-events-none absolute inset-0 opacity-[0.045]"
+        style={{
+            backgroundImage: `
+                linear-gradient(
+                    rgba(255,255,255,0.5) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.5) 1px,
+                    transparent 1px
+                )
+            `,
+            backgroundSize: "72px 72px",
+        }}
+    />
+
+    <div className="pointer-events-none absolute left-[10%] top-[20%] h-[350px] w-[350px] rounded-full bg-[#0878df]/10 blur-[120px]" />
+
+    <div className="pointer-events-none absolute left-[7%] top-0 h-full w-px bg-white/[0.05]" />
+    <div className="pointer-events-none absolute right-[7%] top-0 h-full w-px bg-white/[0.05]" />
+
+    <div className="vortex-container relative z-10">
+
+        <div className="flex items-center gap-4">
+
+            <span className="h-px w-12 bg-[#ffbd00]" />
+
+            <span className="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-[#ffbd00]">
+                DeltaCare
+            </span>
+
+        </div>
+
+        <h1 className="mt-8 text-6xl font-bold leading-none tracking-[-0.055em] text-white sm:text-7xl lg:text-[96px]">
+            About{" "}
+            <span className="text-[#0878df]">
+                Us.
+            </span>
+        </h1>
+
+    </div>
+
+    <div className="absolute bottom-0 left-0 right-0 h-px bg-[#0878df]/40" />
+
+</section>
+
 /* =========================================================
-   TYPES
+   HELPERS
 ========================================================= */
 
-type TimelineItem = {
-    year: string;
-    date: string;
-    text: string;
-};
+function clamp(value: number, min = 0, max = 1) {
+    return Math.max(min, Math.min(max, value));
+}
 
-/* =========================================================
-   TIMELINE DATA
-========================================================= */
+function smoothstep(value: number) {
+    const x = clamp(value);
+    return x * x * (3 - 2 * x);
+}
 
-const timeline: TimelineItem[] = [
-    {
-        year: "2004",
-        date: "January 2004",
-        text: "Gets launched as online martketplace merchant.",
-    },
-    {
-        year: "2006",
-        date: "May 2006",
-        text: "Attracts first investor, Herba Beauty Care, and receives $10 million investment",
-    },
-    {
-        year: "2008",
-        date: "December 2008",
-        text: "Gets $45 million more as Bison Coporation Partners jumps on the investment bandwagon",
-    },
-    {
-        year: "2012",
-        date: "February 2012",
-        text: "Gets launched as online martketplace merchant.",
-    },
-    {
-        year: "2015",
-        date: "September 2015",
-        text: "Gets launched as online martketplace merchant.",
-    },
-    {
-        year: "2017",
-        date: "July 2017",
-        text: "Gets launched as online martketplace merchant.",
-    },
-];
-
-/* =========================================================
-   LEADERS
-========================================================= */
-
-const leaders = [
-    {
-        name: "Leadership Team",
-        role: "Engineering & Project Delivery",
-    },
-    {
-        name: "Leadership Team",
-        role: "Engineering Consultancy",
-    },
-    {
-        name: "Leadership Team",
-        role: "Technical Management",
-    },
-    {
-        name: "Leadership Team",
-        role: "Project Coordination",
-    },
-];
+function lerp(start: number, end: number, amount: number) {
+    return start + (end - start) * clamp(amount);
+}
 
 /* =========================================================
    SCROLL REVEAL
@@ -115,7 +117,7 @@ function Reveal({
             },
             {
                 threshold: 0.15,
-                rootMargin: "0px 0px -80px 0px",
+                rootMargin: "0px 0px -60px 0px",
             }
         );
 
@@ -130,32 +132,14 @@ function Reveal({
             style={{
                 transitionDelay: `${delay}ms`,
             }}
-            className={`transition-all duration-[1000ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${visible
+            className={`transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] ${visible
                 ? "translate-y-0 opacity-100"
-                : "translate-y-16 opacity-0"
+                : "translate-y-12 opacity-0"
                 } ${className}`}
         >
             {children}
         </div>
     );
-}
-
-/* =========================================================
-   HELPERS
-========================================================= */
-
-function clamp(value: number, min = 0, max = 1) {
-    return Math.max(min, Math.min(max, value));
-}
-
-function smoothstep(value: number) {
-    const x = clamp(value);
-
-    return x * x * (3 - 2 * x);
-}
-
-function lerp(start: number, end: number, amount: number) {
-    return start + (end - start) * clamp(amount);
 }
 
 /* =========================================================
@@ -192,7 +176,6 @@ function useSceneProgress(
 
         const handleScroll = () => {
             cancelAnimationFrame(frame);
-
             frame = requestAnimationFrame(update);
         };
 
@@ -206,7 +189,6 @@ function useSceneProgress(
 
         return () => {
             cancelAnimationFrame(frame);
-
             window.removeEventListener("scroll", handleScroll);
             window.removeEventListener("resize", handleScroll);
         };
@@ -216,127 +198,238 @@ function useSceneProgress(
 }
 
 /* =========================================================
+   SLIDING CONTENT
+========================================================= */
+
+const aboutSlides = [
+    {
+        number: "01",
+        eyebrow: "Who We Are",
+        title: "Keeping critical electrical systems",
+        highlight: "ready for operation.",
+        text: "DeltaCare focuses on the maintenance, inspection and technical care of busbar and busduct electrical systems, helping keep critical power distribution infrastructure dependable.",
+        icon: Zap,
+    },
+    {
+        number: "02",
+        eyebrow: "Our Approach",
+        title: "Maintenance built around",
+        highlight: "prevention.",
+        text: "We approach maintenance with attention to system condition, potential issues and practical corrective action — helping identify problems before they become larger operational concerns.",
+        icon: Wrench,
+    },
+    {
+        number: "03",
+        eyebrow: "Our Expertise",
+        title: "Focused knowledge of",
+        highlight: "busbar systems.",
+        text: "Our work is centred around busbar and busduct infrastructure, with a practical focus on inspection, maintenance, testing and restoring systems to reliable working condition.",
+        icon: Gauge,
+    },
+    {
+        number: "04",
+        eyebrow: "Our Commitment",
+        title: "Reliable service for",
+        highlight: "critical infrastructure.",
+        text: "DeltaCare is built around careful technical work, clear communication and a commitment to helping electrical systems operate safely and reliably over their service life.",
+        icon: ShieldCheck,
+    },
+];
+
+/* =========================================================
+   WHY CHOOSE US
+========================================================= */
+
+const reasons = [
+    {
+        number: "01",
+        icon: Wrench,
+        title: "Busbar Maintenance",
+        text: "Focused maintenance services for busbar and busduct electrical distribution systems.",
+    },
+    {
+        number: "02",
+        icon: ClipboardCheck,
+        title: "Detailed Inspection",
+        text: "Systematic inspection helps identify visible condition issues and areas that require attention.",
+    },
+    {
+        number: "03",
+        icon: ShieldCheck,
+        title: "Safety Focus",
+        text: "Maintenance work is approached with attention to electrical safety, system condition and dependable operation.",
+    },
+    {
+        number: "04",
+        icon: Gauge,
+        title: "Practical Technical Work",
+        text: "Solutions are centred on practical maintenance requirements rather than unnecessary complexity.",
+    },
+    {
+        number: "05",
+        icon: CheckCircle2,
+        title: "Reliable Service",
+        text: "A service-focused approach designed to support the continued operation of critical electrical infrastructure.",
+    },
+    {
+        number: "06",
+        icon: Zap,
+        title: "Electrical System Focus",
+        text: "A dedicated focus on power distribution infrastructure and the systems that keep facilities operating.",
+    },
+];
+
+/* =========================================================
    ABOUT US PAGE
 ========================================================= */
 
 export default function AboutUsPage() {
-    /* =======================================================
-       TIMELINE ONLY
-    ======================================================= */
+    const slidingSectionRef = useRef<HTMLElement>(null);
 
-    const timelineRef = useRef<HTMLElement>(null);
+    const progress = useSceneProgress(slidingSectionRef);
 
-    const timelineProgress =
-        useSceneProgress(timelineRef);
+    const slidePosition =
+        progress * (aboutSlides.length - 1);
 
-    const timelinePosition =
-        timelineProgress * (timeline.length - 1);
-
-    const activeTimelineIndex = Math.min(
-        timeline.length - 1,
-        Math.round(timelinePosition)
+    const activeSlide = Math.min(
+        aboutSlides.length - 1,
+        Math.round(slidePosition)
     );
 
     return (
-        <main className="min-h-screen bg-[#f8fafc] text-[#172033]">
+        <main className="min-h-screen bg-white text-[#172033]">
 
-            {/* =======================================================
+            {/* =====================================================
                 NAVBAR
-            ======================================================= */}
+            ===================================================== */}
 
-            <Navbar />
 
-            {/* =======================================================
-                ABOUT HERO
-            ======================================================= */}
 
-            <section className="relative flex min-h-[calc(100vh-250px)] items-center overflow-hidden bg-[#07111f]">
+            {/* =====================================================
+    ABOUT US HERO
+===================================================== */}
+            {/* =====================================================
+    ABOUT US HERO
+===================================================== */}
+
+            <section className="relative min-h-[560px] overflow-hidden bg-[#07111f]">
+
+                {/* HERO IMAGE */}
 
                 <div
-                    className="pointer-events-none absolute inset-0 opacity-[0.055]"
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{
+                        backgroundImage:
+                            "url('https://images.pexels.com/photos/10871737/pexels-photo-10871737.jpeg?cs=srgb&dl=pexels-annaszakaria-10871737.jpg&fm=jpg')",
+                    }}
+                />
+
+                {/* Dark overlay */}
+
+                <div className="absolute inset-0 bg-[#07111f]/75" />
+
+                {/* Stronger left-side gradient for text */}
+
+                <div className="absolute inset-0 bg-gradient-to-r from-[#07111f]/95 via-[#07111f]/70 to-[#07111f]/30" />
+
+                {/* Technical grid */}
+
+                <div
+                    className="pointer-events-none absolute inset-0 opacity-[0.06]"
                     style={{
                         backgroundImage: `
-                            linear-gradient(
-                                rgba(255,255,255,0.5) 1px,
-                                transparent 1px
-                            ),
-                            linear-gradient(
-                                90deg,
-                                rgba(255,255,255,0.5) 1px,
-                                transparent 1px
-                            )
-                        `,
+                linear-gradient(
+                    rgba(255,255,255,0.5) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,0.5) 1px,
+                    transparent 1px
+                )
+            `,
                         backgroundSize: "72px 72px",
                     }}
                 />
 
-                <div className="pointer-events-none absolute left-[8%] top-[18%] h-[420px] w-[420px] rounded-full bg-[#0878df]/10 blur-[120px]" />
+                {/* Blue glow */}
 
-                <div className="pointer-events-none absolute bottom-[-120px] right-[8%] h-[500px] w-[500px] rounded-full bg-[#ffbd00]/5 blur-[130px]" />
+                <div className="pointer-events-none absolute left-[5%] top-[15%] h-[420px] w-[420px] rounded-full bg-[#0878df]/15 blur-[130px]" />
 
-                <div className="pointer-events-none absolute left-[7%] top-0 h-full w-px bg-white/[0.06]" />
+                {/* Side architectural lines */}
+
+                <div className="pointer-events-none absolute left-[7%] top-0 h-full w-px bg-white/[0.08]" />
 
                 <div className="pointer-events-none absolute right-[7%] top-0 h-full w-px bg-white/[0.06]" />
 
-                <div className="vortex-container relative z-10 py-24 sm:py-32 lg:py-40">
+                {/* CONTENT */}
 
-                    <div className="flex items-center gap-4">
+                <div className="vortex-container relative z-10 flex min-h-[560px] items-center py-28 sm:py-32 lg:py-36">
 
-                        <span className="h-px w-14 bg-[#ffbd00]" />
+                    <div className="max-w-4xl">
 
-                        <span className="font-mono text-[10px] font-bold uppercase tracking-[0.24em] text-[#ffbd00]">
-                            About Vortex
-                        </span>
+                        {/* Label */}
 
-                    </div>
+                        <div className="flex items-center gap-4">
 
-                    <h1 className="mt-8 max-w-5xl text-5xl font-bold leading-[0.94] tracking-[-0.055em] text-white sm:text-7xl lg:text-[92px]">
+                            <span className="h-px w-12 bg-[#ffbd00]" />
 
-                        Engineering
+                            <span className="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-[#ffbd00]">
+                                DeltaCare
+                            </span>
 
-                        <br />
+                        </div>
 
-                        <span className="text-[#0878df]">
-                            with purpose.
-                        </span>
+                        {/* Main title */}
 
-                    </h1>
+                        <h1 className="mt-8 text-6xl font-bold leading-[0.88] tracking-[-0.055em] text-white sm:text-7xl lg:text-[100px]">
 
-                    <div className="mt-10 flex max-w-3xl items-start gap-5">
+                            About
 
-                        <span className="mt-2 h-12 w-[2px] shrink-0 bg-[#ffbd00]" />
+                            <br />
 
-                        <p className="text-base leading-8 text-white/55 sm:text-lg">
-                            Discover Vortex Enveco Consultancy LLC — an engineering
-                            consultancy specialising in Vertical Transport, MEP and BIM
-                            engineering solutions.
-                        </p>
+                            <span className="text-[#0878df]">
+                                Us.
+                            </span>
 
-                    </div>
+                        </h1>
 
-                    <div className="mt-16 flex items-center gap-4 text-white/35">
+                        {/* Supporting text */}
 
-                        <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15">
-                            <ArrowDown size={16} />
-                        </span>
+                        <div className="mt-10 flex max-w-2xl items-start gap-5">
 
-                        <span className="font-mono text-[10px] uppercase tracking-[0.2em]">
-                            Scroll to explore
-                        </span>
+                            <span className="mt-1 h-14 w-[2px] shrink-0 bg-[#ffbd00]" />
+
+                            <p className="text-base leading-8 text-white/65 sm:text-lg">
+                                Focused on keeping critical electrical
+                                systems maintained, inspected and ready
+                                for reliable operation.
+                            </p>
+
+                        </div>
 
                     </div>
 
                 </div>
 
-                <div className="absolute bottom-0 left-0 right-0 h-px bg-[#0878df]/40" />
+                {/* Bottom accent */}
+
+                <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#0878df]/60" />
+
+                {/* Small image credit */}
+
+                <div className="absolute bottom-5 right-8 z-20 font-mono text-[8px] uppercase tracking-[0.16em] text-white/25">
+                    Electrical maintenance
+                </div>
 
             </section>
+            {/* =====================================================
+    SMALL ABOUT INTRO
+===================================================== */}
 
-            {/* =======================================================
-                INTRO / WHO WE ARE
-            ======================================================= */}
+            <section className="relative overflow-hidden bg-white py-24 sm:py-28 lg:py-32">
 
-            <section className="relative overflow-hidden bg-white py-28 sm:py-36 lg:py-44">
+                {/* subtle technical grid */}
 
                 <div
                     className="pointer-events-none absolute inset-0 opacity-40"
@@ -358,189 +451,78 @@ export default function AboutUsPage() {
 
                 <div className="vortex-container relative">
 
-                    <div className="grid gap-16 lg:grid-cols-[0.9fr_1.1fr] lg:gap-28">
+                    <Reveal>
 
-                        <div>
+                        <div className="max-w-5xl">
 
                             <div className="flex items-center gap-4">
 
                                 <span className="h-px w-12 bg-[#0878df]" />
 
-                                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[#0878df]">
-                                    Who We Are
+                                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-[#0878df]">
+                                    About DeltaCare
                                 </span>
 
                             </div>
 
-                            <h2 className="mt-7 text-5xl font-bold leading-[0.95] tracking-[-0.05em] text-[#172033] sm:text-6xl lg:text-7xl">
+                            <div className="mt-7 grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
 
-                                Greetings from
+                                <h1 className="text-4xl font-bold leading-[0.95] tracking-[-0.045em] text-[#172033] sm:text-5xl lg:text-6xl">
 
-                                <br />
-
-                                <span className="text-[#0878df]">
-                                    Vortex Enveco.
-                                </span>
-
-                            </h2>
-
-                        </div>
-
-                        <div className="flex items-end">
-
-                            <p className="max-w-2xl text-lg leading-8 text-[#667085] sm:text-xl">
-                                VEC LLC is an engineering consultancy specialising in
-                                Vertical Transport, MEP and BIM engineering solutions. With
-                                extensive experience, we provide comprehensive engineering
-                                services through our back office in India, supporting
-                                projects from concept design to construction supervision.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                    <div className="mt-20 grid gap-6 lg:grid-cols-2">
-
-                        <div className="group relative min-h-[460px] overflow-hidden bg-[#07111f]">
-
-                            <img
-                                src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1600&q=85"
-                                alt="Engineering and architecture"
-                                className="absolute inset-0 h-full w-full object-cover opacity-60 transition duration-[1200ms] group-hover:scale-105 group-hover:opacity-70"
-                            />
-
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#07111f] via-[#07111f]/45 to-transparent" />
-
-                            <div className="absolute bottom-0 left-0 right-0 p-8 sm:p-10">
-
-                                <div className="flex items-center gap-3">
-
-                                    <Building2
-                                        size={18}
-                                        className="text-[#ffbd00]"
-                                    />
-
-                                    <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[#ffbd00]">
-                                        Engineering Consultancy
-                                    </span>
-
-                                </div>
-
-                                <h3 className="mt-4 text-3xl font-bold tracking-[-0.03em] text-white">
-
-                                    From concept
+                                    Built around
 
                                     <br />
 
-                                    to construction.
+                                    <span className="text-[#0878df]">
+                                        electrical reliability.
+                                    </span>
 
-                                </h3>
+                                </h1>
 
-                            </div>
+                                <div className="max-w-2xl">
 
-                        </div>
+                                    <p className="text-base leading-8 text-[#667085] sm:text-lg">
+                                        DeltaCare provides specialised maintenance
+                                        support for busbar and busduct electrical
+                                        systems. Our work is focused on keeping
+                                        critical power distribution infrastructure
+                                        properly maintained, inspected and ready
+                                        for dependable operation.
+                                    </p>
 
-                        <div className="grid gap-6 sm:grid-cols-2">
+                                    <p className="mt-5 text-base leading-8 text-[#667085]">
+                                        From routine maintenance to identifying
+                                        potential issues within an electrical
+                                        distribution system, our approach is
+                                        practical, technical and focused on
+                                        long-term system reliability.
+                                    </p>
 
-                            <div className="border border-[#e4eaf1] bg-[#f8fafc] p-8 transition duration-500 hover:-translate-y-2 hover:border-[#0878df]/40">
-
-                                <Target
-                                    className="text-[#0878df]"
-                                    size={25}
-                                />
-
-                                <h3 className="mt-8 text-xl font-bold text-[#172033]">
-                                    Our Mission
-                                </h3>
-
-                                <p className="mt-4 text-sm leading-7 text-[#667085]">
-                                    Our mission is to deliver high-quality engineering solutions
-                                    through technical excellence, practical design, and coordinated
-                                    project delivery. We aim to support our clients from concept
-                                    design through construction with reliable Vertical Transport,
-                                    MEP and BIM engineering services.
-                                </p>
-
-                            </div>
-
-                            <div className="border border-[#e4eaf1] bg-white p-8 transition duration-500 hover:-translate-y-2 hover:border-[#ffbd00]/50">
-
-                                <Compass
-                                    className="text-[#ffbd00]"
-                                    size={25}
-                                />
-
-                                <h3 className="mt-8 text-xl font-bold text-[#172033]">
-                                    Our Approach
-                                </h3>
-
-                                <p className="mt-4 text-sm leading-7 text-[#667085]">
-                                    Practical engineering, coordinated disciplines and
-                                    technical accuracy throughout every stage of a project.
-                                </p>
-
-                            </div>
-
-                            <div className="border border-[#e4eaf1] bg-white p-8 transition duration-500 hover:-translate-y-2 hover:border-[#0878df]/40">
-
-                                <Eye
-                                    className="text-[#0878df]"
-                                    size={25}
-                                />
-
-                                <h3 className="mt-8 text-xl font-bold text-[#172033]">
-                                    Our Vision
-                                </h3>
-
-                                <p className="mt-4 text-sm leading-7 text-[#667085]">
-                                    Creating coordinated engineering solutions that support
-                                    better-performing buildings and successful project
-                                    delivery.
-                                </p>
-
-                            </div>
-
-                            <div className="border border-[#e4eaf1] bg-[#07111f] p-8 transition duration-500 hover:-translate-y-2">
-
-                                <Lightbulb
-                                    className="text-[#ffbd00]"
-                                    size={25}
-                                />
-
-                                <h3 className="mt-8 text-xl font-bold text-white">
-                                    Our Expertise
-                                </h3>
-
-                                <p className="mt-4 text-sm leading-7 text-white/45">
-                                    Vertical Transport, MEP and BIM engineering solutions
-                                    supported by a dedicated back-office team in India.
-                                </p>
+                                </div>
 
                             </div>
 
                         </div>
 
-                    </div>
+                    </Reveal>
 
                 </div>
 
             </section>
 
-            {/* =======================================================
-                TIMELINE
-                FIXED OVERLAP VERSION
-            ======================================================= */}
+            {/* =====================================================
+                SLIDING ABOUT SECTION
+            ===================================================== */}
 
             <section
-                ref={timelineRef}
-                className="relative h-[650vh] bg-[#07111f]"
+                ref={slidingSectionRef}
+                className="relative h-[480vh] bg-[#07111f]"
             >
 
-                <div className="sticky top-0 z-10 h-screen overflow-hidden">
+                <div className="sticky top-0 h-screen overflow-hidden">
 
                     {/* =================================================
-                        BACKGROUND GRID
+                        BACKGROUND
                     ================================================= */}
 
                     <div
@@ -561,17 +543,15 @@ export default function AboutUsPage() {
                         }}
                     />
 
-                    {/* ARCHITECTURAL LINES */}
-
                     <div className="pointer-events-none absolute left-[7%] top-0 h-full w-px bg-white/[0.045]" />
 
                     <div className="pointer-events-none absolute right-[7%] top-0 h-full w-px bg-white/[0.045]" />
 
                     {/* =================================================
-                        TOP HEADER
+                        TOP LABEL
                     ================================================= */}
 
-                    <div className="absolute left-0 right-0 top-9 z-30">
+                    <div className="absolute left-0 right-0 top-8 z-30">
 
                         <div className="vortex-container flex items-center justify-between">
 
@@ -579,23 +559,19 @@ export default function AboutUsPage() {
 
                                 <span className="h-px w-12 bg-[#ffbd00]" />
 
-                                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[#ffbd00]">
-                                    Our Journey
+                                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-[#ffbd00]">
+                                    DeltaCare
                                 </span>
 
                             </div>
 
                             <span className="font-mono text-[10px] font-bold tracking-[0.2em] text-white/30">
 
-                                {String(
-                                    activeTimelineIndex + 1
-                                ).padStart(2, "0")}
+                                {String(activeSlide + 1).padStart(2, "0")}
 
                                 {" / "}
 
-                                {String(
-                                    timeline.length
-                                ).padStart(2, "0")}
+                                {String(aboutSlides.length).padStart(2, "0")}
 
                             </span>
 
@@ -604,345 +580,171 @@ export default function AboutUsPage() {
                     </div>
 
                     {/* =================================================
-                        INTRO TITLE
-
-                        IMPORTANT:
-                        The intro is now completely separated from
-                        the timeline cards vertically.
+                        SLIDING CONTENT
                     ================================================= */}
 
-                    <div
-                        className="absolute left-0 right-0 top-[14%] z-10"
-                        style={{
-                            opacity: lerp(
-                                1,
-                                0,
-                                smoothstep(
-                                    clamp(
-                                        (timelineProgress - 0.06) * 7
-                                    )
-                                )
-                            ),
+                    <div className="absolute inset-x-0 top-[18%] bottom-[15%]">
 
-                            transform: `
-                                translate3d(
-                                    0,
-                                    ${lerp(
-                                0,
-                                -70,
-                                smoothstep(
-                                    clamp(
-                                        (timelineProgress - 0.06) * 6
-                                    )
-                                )
-                            )}px,
-                                    0
-                                )
-                            `,
-                        }}
-                    >
+                        <div className="vortex-container relative h-full">
 
-                        <div className="vortex-container">
+                            {aboutSlides.map((slide, index) => {
 
-                            <h2 className="max-w-4xl text-5xl font-bold leading-[0.9] tracking-[-0.055em] text-white sm:text-7xl lg:text-[82px]">
+                                const distance =
+                                    index - slidePosition;
 
-                                Discover
+                                const absoluteDistance =
+                                    Math.abs(distance);
 
-                                <br />
-
-                                <span className="text-[#0878df]">
-                                    VORTEX ENVECO LLC.
-                                </span>
-
-                            </h2>
-
-                            <p className="mt-6 max-w-2xl text-base leading-8 text-white/40 sm:text-lg">
-                                Explore the milestones and moments that
-                                define the company&apos;s journey.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                    {/* =================================================
-                        CENTRAL TIMELINE LINE
-                    ================================================= */}
-
-                    <div className="absolute left-1/2 top-[36%] hidden h-[43%] -translate-x-1/2 lg:block">
-
-                        {/* BASE LINE */}
-
-                        <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-white/10" />
-
-                        {/* ACTIVE LINE */}
-
-                        <div
-                            className="absolute left-1/2 top-0 w-[2px] -translate-x-1/2 bg-[#0878df]"
-                            style={{
-                                height: `${timelineProgress * 100}%`,
-                            }}
-                        />
-
-                        {/* DOTS */}
-
-                        {timeline.map((item, index) => {
-
-                            const point =
-                                index /
-                                (timeline.length - 1);
-
-                            const distance =
-                                Math.abs(
-                                    timelinePosition - index
+                                const visibility = clamp(
+                                    1 -
+                                    absoluteDistance /
+                                    0.9
                                 );
 
-                            const active =
-                                distance < 0.45;
+                                const easedVisibility =
+                                    smoothstep(visibility);
 
-                            return (
-                                <div
-                                    key={item.year}
-                                    className="absolute left-1/2 -translate-x-1/2"
-                                    style={{
-                                        top: `${point * 100}%`,
-                                    }}
-                                >
+                                const x =
+                                    distance * 900;
 
+                                const y =
+                                    distance * 22;
+
+                                const scale = lerp(
+                                    0.88,
+                                    1,
+                                    easedVisibility
+                                );
+
+                                const Icon = slide.icon;
+
+                                return (
                                     <div
-                                        className={`h-4 w-4 rounded-full border-2 ${active
-                                            ? "border-[#07111f] bg-[#0878df] shadow-[0_0_0_7px_rgba(8,120,223,0.12),0_0_30px_rgba(8,120,223,0.45)]"
-                                            : "border-[#07111f] bg-white/20"
-                                            }`}
-                                    />
+                                        key={slide.number}
+                                        className="pointer-events-none absolute inset-0"
+                                        style={{
+                                            opacity:
+                                                easedVisibility,
+                                            transform: `
+                                                translate3d(
+                                                    ${x}px,
+                                                    ${y}px,
+                                                    0
+                                                )
+                                                scale(${scale})
+                                            `,
+                                            willChange:
+                                                "transform, opacity",
+                                        }}
+                                    >
 
-                                </div>
-                            );
-                        })}
+                                        <div className="grid h-full items-center gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-24">
 
-                    </div>
+                                            {/* =================================================
+                                                LEFT
+                                            ================================================= */}
 
-                    {/* =================================================
-                        TIMELINE CARDS
+                                            <div className="lg:text-right">
 
-                        IMPORTANT FIXES:
-                        - Cards start lower.
-                        - Cards travel farther horizontally.
-                        - Neighboring cards are more separated.
-                        - Vertical movement is reduced.
-                    ================================================= */}
+                                                <div className="flex items-center gap-4 lg:justify-end">
 
-                    <div className="absolute inset-x-0 top-[39%]">
+                                                    <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[#0878df]">
+                                                        {slide.eyebrow}
+                                                    </span>
 
-                        <div className="vortex-container">
+                                                    <span className="hidden h-px w-12 bg-[#0878df] lg:block" />
 
-                            <div className="relative h-[400px]">
+                                                </div>
 
-                                {timeline.map(
-                                    (item, index) => {
+                                                <div className="mt-8 font-mono text-[100px] font-bold leading-none tracking-[-0.08em] text-white/10 sm:text-[140px] lg:text-[180px]">
 
-                                        const distance =
-                                            index -
-                                            timelinePosition;
-
-                                        const absoluteDistance =
-                                            Math.abs(distance);
-
-                                        /*
-                                         * Only the current milestone
-                                         * and its immediate neighbors
-                                         * participate in the transition.
-                                         */
-
-                                        const visibility =
-                                            clamp(
-                                                1 -
-                                                absoluteDistance /
-                                                0.95
-                                            );
-
-                                        const easedVisibility =
-                                            smoothstep(
-                                                visibility
-                                            );
-
-                                        /*
-                                         * Much larger horizontal
-                                         * separation prevents cards
-                                         * from sitting on top of each
-                                         * other.
-                                         */
-
-                                        const x =
-                                            distance * 760;
-
-                                        /*
-                                         * Keep cards almost level.
-                                         * This prevents the giant year
-                                         * from colliding with another
-                                         * card vertically.
-                                         */
-
-                                        const y =
-                                            distance * 25;
-
-                                        /*
-                                         * Current card = 1
-                                         * Neighbor = smaller
-                                         */
-
-                                        const scale =
-                                            lerp(
-                                                0.88,
-                                                1,
-                                                easedVisibility
-                                            );
-
-                                        const opacity =
-                                            easedVisibility;
-
-                                        return (
-                                            <div
-                                                key={item.year}
-                                                className="pointer-events-none absolute inset-0"
-                                                style={{
-                                                    opacity,
-
-                                                    transform: `
-                                                        translate3d(
-                                                            ${x}px,
-                                                            ${y}px,
-                                                            0
-                                                        )
-                                                        scale(${scale})
-                                                    `,
-
-                                                    willChange:
-                                                        "transform, opacity",
-                                                }}
-                                            >
-
-                                                <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-20">
-
-                                                    {/* =================================================
-                                                        YEAR
-                                                    ================================================= */}
-
-                                                    <div className="pr-6 lg:pr-0 lg:text-right">
-
-                                                        <div className="font-mono text-[80px] font-bold leading-none tracking-[-0.08em] text-white sm:text-[110px] lg:text-[145px]">
-
-                                                            {item.year}
-
-                                                        </div>
-
-                                                        <div className="mt-5 flex items-center gap-3 lg:justify-end">
-
-                                                            <span className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-[#ffbd00]">
-
-                                                                Milestone{" "}
-
-                                                                {String(
-                                                                    index + 1
-                                                                ).padStart(
-                                                                    2,
-                                                                    "0"
-                                                                )}
-
-                                                            </span>
-
-                                                            <span className="h-px w-12 bg-[#ffbd00]" />
-
-                                                        </div>
-
-                                                    </div>
-
-                                                    {/* =================================================
-                                                        CARD
-                                                    ================================================= */}
-
-                                                    <div className="pl-0">
-
-                                                        <div className="relative max-w-lg border border-white/10 bg-[#0c1828]/95 p-7 shadow-[0_30px_80px_rgba(0,0,0,0.35)] backdrop-blur-md sm:p-9">
-
-                                                            <div className="absolute left-0 top-0 h-[2px] w-20 bg-[#ffbd00]" />
-
-                                                            <span className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-[#0878df]">
-
-                                                                Vortex timeline
-
-                                                            </span>
-
-                                                            <h3 className="mt-5 text-2xl font-bold text-white sm:text-3xl">
-
-                                                                {item.date}
-
-                                                            </h3>
-
-                                                            <p className="mt-5 max-w-lg text-sm leading-7 text-white/50 sm:text-base">
-
-                                                                {item.text}
-
-                                                            </p>
-
-                                                            <div className="mt-8 flex items-center gap-3">
-
-                                                                <span className="h-px w-10 bg-[#0878df]" />
-
-                                                                <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-white/25">
-
-                                                                    VORTEX ENVECO LLC
-
-                                                                </span>
-
-                                                            </div>
-
-                                                        </div>
-
-                                                    </div>
+                                                    {slide.number}
 
                                                 </div>
 
                                             </div>
-                                        );
-                                    }
-                                )}
 
-                            </div>
+                                            {/* =================================================
+                                                RIGHT CARD
+                                            ================================================= */}
+
+                                            <div className="relative max-w-2xl border border-white/10 bg-[#0c1828]/95 p-8 shadow-[0_35px_90px_rgba(0,0,0,0.4)] backdrop-blur-md sm:p-10 lg:p-12">
+
+                                                <div className="absolute left-0 top-0 h-[2px] w-24 bg-[#ffbd00]" />
+
+                                                <div className="flex h-12 w-12 items-center justify-center border border-[#0878df]/30 bg-[#0878df]/10">
+
+                                                    <Icon
+                                                        size={21}
+                                                        className="text-[#0878df]"
+                                                    />
+
+                                                </div>
+
+                                                <h2 className="mt-8 max-w-xl text-3xl font-bold leading-[1.02] tracking-[-0.035em] text-white sm:text-4xl lg:text-5xl">
+
+                                                    {slide.title}
+
+                                                    <br />
+
+                                                    <span className="text-[#0878df]">
+                                                        {slide.highlight}
+                                                    </span>
+
+                                                </h2>
+
+                                                <p className="mt-7 max-w-xl text-base leading-8 text-white/50 sm:text-lg">
+                                                    {slide.text}
+                                                </p>
+
+                                                <div className="mt-10 flex items-center gap-4">
+
+                                                    <span className="h-px w-12 bg-[#ffbd00]" />
+
+                                                    <span className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-white/25">
+                                                        Electrical maintenance
+                                                    </span>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                );
+                            })}
 
                         </div>
 
                     </div>
 
                     {/* =================================================
-                        YEAR BAR
+                        SLIDE INDICATORS
                     ================================================= */}
 
-                    <div className="absolute bottom-[8%] left-0 right-0 z-20">
+                    <div className="absolute bottom-[9%] left-0 right-0">
 
                         <div className="vortex-container">
 
-                            <div className="grid grid-cols-6 border-t border-white/10">
+                            <div className="grid grid-cols-4 border-t border-white/10">
 
-                                {timeline.map(
-                                    (item, index) => {
+                                {aboutSlides.map(
+                                    (slide, index) => {
 
                                         const point =
                                             index /
-                                            (timeline.length - 1);
-
-                                        const distance =
-                                            Math.abs(
-                                                timelinePosition -
-                                                index
-                                            );
+                                            (aboutSlides.length - 1);
 
                                         const active =
-                                            distance < 0.5;
+                                            Math.abs(
+                                                slidePosition -
+                                                index
+                                            ) < 0.5;
 
                                         return (
                                             <div
-                                                key={item.year}
+                                                key={slide.number}
                                                 className="relative py-4"
                                             >
 
@@ -953,23 +755,31 @@ export default function AboutUsPage() {
                                                         }`}
                                                 />
 
-                                                <span
-                                                    className={`font-mono text-xs font-bold ${active
-                                                        ? "text-[#ffbd00]"
-                                                        : "text-white/20"
-                                                        }`}
-                                                >
-                                                    {item.year}
-                                                </span>
+                                                <div className="flex items-center justify-between">
+
+                                                    <span
+                                                        className={`font-mono text-[10px] font-bold ${active
+                                                            ? "text-[#ffbd00]"
+                                                            : "text-white/20"
+                                                            }`}
+                                                    >
+                                                        {slide.number}
+                                                    </span>
+
+                                                    <span className="hidden font-mono text-[9px] uppercase tracking-[0.16em] text-white/15 sm:block">
+                                                        {slide.eyebrow}
+                                                    </span>
+
+                                                </div>
 
                                                 <div
-                                                    className="absolute bottom-0 left-0 h-[1px] bg-[#0878df]"
+                                                    className="absolute bottom-0 left-0 h-px bg-[#0878df]"
                                                     style={{
-                                                        width: `${timelineProgress >=
-                                                            point
-                                                            ? 100
-                                                            : 0
-                                                            }%`,
+                                                        width:
+                                                            progress >=
+                                                                point
+                                                                ? "100%"
+                                                                : "0%",
                                                     }}
                                                 />
 
@@ -989,10 +799,10 @@ export default function AboutUsPage() {
                     ================================================= */}
 
                     <div
-                        className="absolute bottom-3 md:bottom-10 left-1/2-translate-x-1/2 font-mono text-[9px] uppercase tracking-[0.25em] text-white/20"
+                        className="absolute bottom-3 left-1/2 -translate-x-1/2 font-mono text-[9px] uppercase tracking-[0.25em] text-white/20 md:bottom-8"
                         style={{
                             opacity:
-                                timelineProgress > 0.9
+                                progress > 0.9
                                     ? 0
                                     : 1,
                         }}
@@ -1004,9 +814,9 @@ export default function AboutUsPage() {
 
             </section>
 
-            {/* =======================================================
-                LEADERS
-            ======================================================= */}
+            {/* =====================================================
+                WHY CHOOSE US
+            ===================================================== */}
 
             <section className="relative overflow-hidden bg-white py-28 sm:py-36 lg:py-44">
 
@@ -1030,265 +840,110 @@ export default function AboutUsPage() {
 
                 <div className="vortex-container relative">
 
-                    <div className="flex items-center gap-4">
+                    {/* =================================================
+                        HEADER
+                    ================================================= */}
 
-                        <span className="h-px w-12 bg-[#0878df]" />
+                    <Reveal>
 
-                        <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[#0878df]">
-                            Leadership
-                        </span>
+                        <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-end lg:gap-24">
 
-                    </div>
+                            <div>
 
-                    <div className="mt-7 flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
+                                <div className="flex items-center gap-4">
 
-                        <h2 className="max-w-3xl text-5xl font-bold leading-[0.95] tracking-[-0.05em] text-[#172033] sm:text-7xl">
+                                    <span className="h-px w-12 bg-[#0878df]" />
 
-                            Meet our
-
-                            <br />
-
-                            <span className="text-[#0878df]">
-                                leaders.
-                            </span>
-
-                        </h2>
-
-                        <p className="max-w-md text-base leading-7 text-[#667085]">
-                            Experienced leadership supporting the company&apos;s engineering
-                            capabilities and project delivery.
-                        </p>
-
-                    </div>
-
-                    <div className="mt-20 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-
-                        {leaders.map(
-                            (leader, index) => (
-                                <div
-                                    key={`${leader.name}-${index}`}
-                                    className="group overflow-hidden border border-[#e4eaf1] bg-white transition-all duration-700 hover:-translate-y-3 hover:border-[#0878df]/40 hover:shadow-[0_25px_60px_rgba(7,17,31,0.08)]"
-                                >
-
-                                    <div className="relative aspect-[0.9] overflow-hidden bg-[#e9eef3]">
-
-                                        <img
-                                            src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=85"
-                                            alt={leader.name}
-                                            className="h-full w-full object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0"
-                                        />
-
-                                        <div className="absolute inset-0 bg-gradient-to-t from-[#07111f]/70 via-transparent to-transparent opacity-70" />
-
-                                        <span className="absolute left-5 top-5 font-mono text-[10px] font-bold tracking-[0.15em] text-white/60">
-                                            0{index + 1}
-                                        </span>
-
-                                    </div>
-
-                                    <div className="p-6">
-
-                                        <h3 className="text-lg font-bold text-[#172033]">
-                                            {leader.name}
-                                        </h3>
-
-                                        <p className="mt-2 font-mono text-[9px] font-bold uppercase tracking-[0.17em] text-[#0878df]">
-                                            {leader.role}
-                                        </p>
-
-                                    </div>
+                                    <span className="font-mono text-[10px] font-bold uppercase tracking-[0.22em] text-[#0878df]">
+                                        Why DeltaCare
+                                    </span>
 
                                 </div>
-                            )
-                        )}
 
-                    </div>
+                                <h2 className="mt-7 text-5xl font-bold leading-[0.93] tracking-[-0.055em] text-[#172033] sm:text-6xl lg:text-[76px]">
 
-                    <div className="mt-10 flex justify-end">
+                                    Why choose
 
-                        <a
-                            href="#contact"
-                            className="group inline-flex items-center gap-3 border border-[#172033] px-6 py-4 text-[11px] font-bold uppercase tracking-[0.16em] text-[#172033] transition hover:bg-[#172033] hover:text-white"
-                        >
+                                    <br />
 
-                            Become Member in Team
+                                    <span className="text-[#0878df]">
+                                        DeltaCare?
+                                    </span>
 
-                            <ArrowUpRight
-                                size={16}
-                                className="transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
-                            />
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-            {/* =======================================================
-    AWARDS
-======================================================= */}
-
-            <section className="relative overflow-hidden bg-[#07111f] py-28 sm:py-36 lg:py-44">
-
-                {/* BACKGROUND GRID */}
-                <div
-                    className="pointer-events-none absolute inset-0 opacity-[0.045]"
-                    style={{
-                        backgroundImage: `
-                linear-gradient(
-                    rgba(255,255,255,0.5) 1px,
-                    transparent 1px
-                ),
-                linear-gradient(
-                    90deg,
-                    rgba(255,255,255,0.5) 1px,
-                    transparent 1px
-                )
-            `,
-                        backgroundSize: "80px 80px",
-                    }}
-                />
-
-                {/* ARCHITECTURAL SIDE LINES */}
-                <div className="pointer-events-none absolute left-[7%] top-0 h-full w-px bg-white/[0.045]" />
-                <div className="pointer-events-none absolute right-[7%] top-0 h-full w-px bg-white/[0.045]" />
-
-                <div className="vortex-container relative">
-
-                    {/* =================================================
-            HEADER
-        ================================================= */}
-
-                    <div className="grid items-end gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-24">
-
-                        <div>
-
-                            <div className="flex items-center gap-4">
-
-                                <span className="h-px w-12 bg-[#ffbd00]" />
-
-                                <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[#ffbd00]">
-                                    Recognition
-                                </span>
+                                </h2>
 
                             </div>
 
-                            <h2 className="mt-7 text-5xl font-bold leading-[0.92] tracking-[-0.055em] text-white sm:text-7xl lg:text-[82px]">
+                            <p className="max-w-xl text-base leading-8 text-[#667085] sm:text-lg">
 
-                                Awards &
+                                Electrical distribution systems are critical
+                                to the operation of a facility. DeltaCare
+                                brings a focused maintenance approach to
+                                busbar and busduct systems, with attention
+                                to reliability, safety and practical
+                                technical requirements.
 
-                                <br />
-
-                                <span className="text-[#0878df]">
-                                    Recognition.
-                                </span>
-
-                            </h2>
-
-                        </div>
-
-                        <div className="pb-2">
-
-                            <p className="max-w-2xl text-base leading-8 text-white/50 sm:text-lg">
-                                Industry recognition reflects the relationships,
-                                standards and professional work delivered across
-                                our projects.
                             </p>
 
                         </div>
 
-                    </div>
+                    </Reveal>
 
                     {/* =================================================
-            COMPANY LOGOS
-        ================================================= */}
+                        REASONS GRID
+                    ================================================= */}
 
-                    <div className="mt-20">
+                    <div className="mt-20 grid border-l border-t border-[#e3e8ef] sm:grid-cols-2 lg:grid-cols-3">
 
-                        <div className="grid grid-cols-2 border-y border-white/10 sm:grid-cols-3 lg:grid-cols-5">
+                        {reasons.map(
+                            (reason, index) => {
 
-                            {/* LINUM CONSULT */}
-                            <div className="group relative flex h-[170px] items-center justify-center border-b border-white/10 px-8 transition-all duration-500 hover:bg-white/[0.025] sm:border-r lg:border-b-0">
+                                const Icon = reason.icon;
 
-                                <div className="absolute left-0 top-0 h-[2px] w-0 bg-[#0878df] transition-all duration-500 group-hover:w-full" />
+                                return (
+                                    <Reveal
+                                        key={reason.number}
+                                        delay={index * 70}
+                                        className="h-full"
+                                    >
 
-                                <img
-                                    src="/awards/linum-consult.png"
-                                    alt="Linum Consult"
-                                    className="max-h-[70px] max-w-[170px] w-auto object-contain opacity-45 grayscale transition-all duration-500 group-hover:opacity-100 group-hover:grayscale-0"
-                                />
+                                        <div className="group relative h-full min-h-[270px] border-b border-r border-[#e3e8ef] bg-white p-8 transition-all duration-500 hover:-translate-y-1 hover:bg-[#f8fafc] sm:p-9 lg:p-10">
 
-                            </div>
+                                            {/* top accent */}
 
-                            {/* SURVATION */}
-                            <div className="group relative flex h-[170px] items-center justify-center border-b border-white/10 px-8 transition-all duration-500 hover:bg-white/[0.025] lg:border-b-0 lg:border-r">
+                                            <div className="absolute left-0 top-0 h-[2px] w-0 bg-[#0878df] transition-all duration-500 group-hover:w-full" />
 
-                                <div className="absolute left-0 top-0 h-[2px] w-0 bg-[#ffbd00] transition-all duration-500 group-hover:w-full" />
+                                            <div className="flex items-start justify-between">
 
-                                <img
-                                    src="/awards/survation.png"
-                                    alt="Survation"
-                                    className="max-h-[70px] max-w-[170px] w-auto object-contain opacity-45 grayscale transition-all duration-500 group-hover:opacity-100 group-hover:grayscale-0"
-                                />
+                                                <div className="flex h-11 w-11 items-center justify-center border border-[#0878df]/20 bg-[#0878df]/5">
 
-                            </div>
+                                                    <Icon
+                                                        size={20}
+                                                        className="text-[#0878df]"
+                                                    />
 
-                            {/* CONESTOGA */}
-                            <div className="group relative flex h-[170px] items-center justify-center border-b border-white/10 px-8 transition-all duration-500 sm:border-r lg:border-b-0">
+                                                </div>
 
-                                <div className="absolute left-0 top-0 h-[2px] w-0 bg-[#0878df] transition-all duration-500 group-hover:w-full" />
+                                                <span className="font-mono text-[10px] font-bold tracking-[0.18em] text-[#b5bdc9]">
+                                                    {reason.number}
+                                                </span>
 
-                                <img
-                                    src="/awards/conestoga.png"
-                                    alt="Conestoga"
-                                    className="max-h-[70px] max-w-[170px] w-auto object-contain opacity-45 grayscale transition-all duration-500 group-hover:opacity-100 group-hover:grayscale-0"
-                                />
+                                            </div>
 
-                            </div>
+                                            <h3 className="mt-10 text-xl font-bold tracking-[-0.02em] text-[#172033]">
+                                                {reason.title}
+                                            </h3>
 
-                            {/* G4S */}
-                            <div className="group relative flex h-[170px] items-center justify-center border-b border-white/10 px-8 transition-all duration-500 lg:border-b-0 lg:border-r">
+                                            <p className="mt-4 text-sm leading-7 text-[#667085]">
+                                                {reason.text}
+                                            </p>
 
-                                <div className="absolute left-0 top-0 h-[2px] w-0 bg-[#ffbd00] transition-all duration-500 group-hover:w-full" />
+                                        </div>
 
-                                <img
-                                    src="/awards/g4s.png"
-                                    alt="G4S"
-                                    className="max-h-[70px] max-w-[170px] w-auto object-contain opacity-45 grayscale transition-all duration-500 group-hover:opacity-100 group-hover:grayscale-0"
-                                />
-
-                            </div>
-
-                            {/* ISR */}
-                            <div className="group relative flex h-[170px] items-center justify-center border-b border-white/10 px-8 transition-all duration-500 sm:col-span-2 lg:col-span-1 lg:border-b-0">
-
-                                <div className="absolute left-0 top-0 h-[2px] w-0 bg-[#0878df] transition-all duration-500 group-hover:w-full" />
-
-                                <img
-                                    src="/awards/isr.png"
-                                    alt="ISR"
-                                    className="max-h-[70px] max-w-[170px] w-auto object-contain opacity-45 grayscale transition-all duration-500 group-hover:opacity-100 group-hover:grayscale-0"
-                                />
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    {/* =================================================
-            LOWER LABEL
-        ================================================= */}
-
-                    <div className="mt-10 flex items-center gap-4">
-
-                        <span className="h-px w-12 bg-[#0878df]" />
-
-                        <span className="font-mono text-[9px] font-bold uppercase tracking-[0.22em] text-white/25">
-                            Professional recognition
-                        </span>
+                                    </Reveal>
+                                );
+                            }
+                        )}
 
                     </div>
 
@@ -1296,87 +951,81 @@ export default function AboutUsPage() {
 
             </section>
 
-            {/* =======================================================
-                FINAL CTA
-            ======================================================= */}
+            {/* =====================================================
+                SIMPLE CTA
+            ===================================================== */}
 
-            <section className="relative overflow-hidden bg-white py-28 sm:py-36">
+            <section className="relative overflow-hidden bg-[#07111f] py-24 sm:py-32">
 
-                <div className="vortex-container">
+                <div
+                    className="pointer-events-none absolute inset-0 opacity-[0.045]"
+                    style={{
+                        backgroundImage: `
+                            linear-gradient(
+                                rgba(255,255,255,0.5) 1px,
+                                transparent 1px
+                            ),
+                            linear-gradient(
+                                90deg,
+                                rgba(255,255,255,0.5) 1px,
+                                transparent 1px
+                            )
+                        `,
+                        backgroundSize: "80px 80px",
+                    }}
+                />
+
+                <div className="vortex-container relative">
 
                     <Reveal>
 
-                        <div className="relative overflow-hidden bg-[#0878df] px-8 py-16 sm:px-14 sm:py-20 lg:px-20 lg:py-24">
+                        <div className="grid items-end gap-10 lg:grid-cols-[1fr_auto]">
 
-                            <div
-                                className="pointer-events-none absolute inset-0 opacity-10"
-                                style={{
-                                    backgroundImage: `
-                                        linear-gradient(
-                                            rgba(255,255,255,0.8) 1px,
-                                            transparent 1px
-                                        ),
-                                        linear-gradient(
-                                            90deg,
-                                            rgba(255,255,255,0.8) 1px,
-                                            transparent 1px
-                                        )
-                                    `,
-                                    backgroundSize: "50px 50px",
-                                }}
-                            />
-
-                            <div className="relative z-10 max-w-3xl">
+                            <div>
 
                                 <div className="flex items-center gap-4">
 
                                     <span className="h-px w-12 bg-[#ffbd00]" />
 
                                     <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[#ffbd00]">
-                                        Work with us
+                                        DeltaCare
                                     </span>
 
                                 </div>
 
-                                <h2 className="mt-7 text-4xl font-bold leading-[0.95] tracking-[-0.04em] text-white sm:text-6xl">
+                                <h2 className="mt-7 max-w-3xl text-4xl font-bold leading-[0.95] tracking-[-0.045em] text-white sm:text-6xl">
 
-                                    Let&apos;s build what
-
+                                    Keep your electrical
                                     <br />
 
-                                    comes next.
+                                    systems
+                                    <span className="text-[#0878df]">
+                                        {" "}ready.
+                                    </span>
 
                                 </h2>
 
-                                <p className="mt-7 max-w-xl text-base leading-7 text-white/70">
-                                    Vortex Enveco Consultancy LLC provides engineering solutions
-                                    across Vertical Transport, MEP and BIM.
+                                <p className="mt-7 max-w-xl text-base leading-7 text-white/45">
+                                    Talk to DeltaCare about busbar,
+                                    busduct and electrical maintenance
+                                    requirements.
                                 </p>
 
-                                <a
-                                    href="#contact"
-                                    className="group mt-9 inline-flex items-center gap-3 bg-[#ffbd00] px-7 py-4 text-[11px] font-black uppercase tracking-[0.15em] text-[#172033] transition-all duration-300 hover:-translate-y-1 hover:bg-white"
-                                >
-
-                                    Let&apos;s Talk
-
-                                    <ArrowUpRight
-                                        size={17}
-                                        className="transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
-                                    />
-
-                                </a>
-
                             </div>
 
-                            <div className="pointer-events-none absolute -bottom-28 -right-16 opacity-10">
+                            <a
+                                href="#contact"
+                                className="group inline-flex items-center gap-4 border border-white/15 px-7 py-4 text-[11px] font-bold uppercase tracking-[0.17em] text-white transition-all duration-300 hover:border-[#ffbd00] hover:bg-[#ffbd00] hover:text-[#172033]"
+                            >
 
-                                <Users
-                                    size={330}
-                                    strokeWidth={0.6}
+                                Contact DeltaCare
+
+                                <ArrowUpRight
+                                    size={17}
+                                    className="transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1"
                                 />
 
-                            </div>
+                            </a>
 
                         </div>
 
@@ -1386,6 +1035,6 @@ export default function AboutUsPage() {
 
             </section>
 
-        </main >
+        </main>
     );
 }

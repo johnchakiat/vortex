@@ -17,7 +17,7 @@ export default function ContactPage() {
                 EXISTING NAVBAR
                 Do not modify Navbar.tsx
             ========================================================= */}
-            <Navbar />
+
 
             {/* =========================================================
                 HERO
